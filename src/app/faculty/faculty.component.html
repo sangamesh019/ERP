@@ -1,0 +1,109 @@
+<!-- <div class="container"> -->
+<div class="wrapper">
+  <div class="col-lg-4">
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>Home page student pic</h3>
+        <ul class="list-unstyled components">
+          <li>
+            <a href="#">Edit profile</a>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="list-unstyled components">
+        <p>What you can do.</p>
+        <li class="active">
+          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">upload Notes</a>
+        </li>
+        <li>
+          <a href="#">View results</a>
+        </li>
+        <li (click)="uploadAssignment()">
+          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Assignments</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-lg-8">
+    <!-- Page Content -->
+    <!-- <div id="content"> -->
+    <h2>List of Contents</h2>
+    <p></p>
+    <!-- <div class="container"> -->
+    <h1>upload notes</h1>
+    <form [formGroup]="fProfileForm">
+      <div class="form-group">
+        <label for="branch">
+          branch:</label>
+        <select type="text" class="form-control" style="width: 50% !important" id="branch" formControlName="branch">
+          <option id="EEE" selected="selected">
+            EEE
+          </option>
+          <option id="EC">
+            EC
+          </option>
+        </select>
+
+        <label>
+          Sem:</label>
+        <select type="text" class="form-control" style="width: 50% !important" id="branch" formControlName="sem">
+          <option id="1"  value="1" selected="selected">
+            1
+          </option>
+          <option id="2">
+            2
+          </option>
+          <option id="3">
+            3
+          </option>
+          <option id="4">
+            4
+          </option>
+          <option id="5">
+            5
+          </option>
+          <option id="6">
+            6
+          </option>
+          <option id="7">
+            7
+          </option>
+          <option id="8">
+            8
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>
+          section:</label>
+          <select type="text" class="form-control" style="width: 50% !important" id="branch" formControlName="section">
+              <option id="a"  value="a" selected="selected">
+                "A" section
+              </option>
+              <option id="b">
+                  "B" section
+              </option>
+              <option id="c">
+                  "C" section
+              </option>
+              </select>
+      </div>
+      <div class="form-group">
+        <label>
+          Subject Name:</label>
+        <input type="text" class="form-control" style="width: 50% !important" formControlName="subject">
+      </div>
+      <div class="form-group">
+          <label>
+            Notes Name:</label>
+          <input type="file" class="form-control" style="width: 50% !important" formControlName="file"
+          (change)="selectFile($event)"
+          >
+        </div>
+      <div class="form-group">
+        <button type="text" class="form-control" style="width: 50% !important"
+          (click)="uploadNotes($this)">upload</button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,124 @@
+<div class="container">
+  <h1>Students Signup page</h1>
+  <form [formGroup]="profileForm">
+    <div class="form-group">
+      <div class="col-lg-4">
+        <label for="firstName"> First Name:</label>
+        <input type="text" class="form-control" id="firstName" formControlName="firstName" />
+      </div>
+      <div class="col-lg-4">
+        <label> Middle Name:</label>
+        <input type="text" class="form-control" formControlName="middleName" />
+      </div>
+      <div class="col-lg-4">
+        <label> Last Name:</label>
+        <input type="text" class="form-control" formControlName="lastName" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-12">
+        <label> Gender:</label>
+        <div class="col-md-12">
+          <label> Male:</label>
+          <input type="radio" formControlName="gender" value="male"/>
+        </div>
+        <div class="col-md-12">
+          <label> Female:</label>
+          <input type="radio" formControlName="gender" value="female"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-12">
+        <label> DOB:</label>
+        <input type="date" class="form-control" formControlName="dob" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-12">
+        <label> Permanent Address:</label>
+        <input type="text" class="form-control" formControlName="addressP" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-12">
+        <label> Temp Address:</label>
+        <input type="text" class="form-control" formControlName="addressT" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-6">
+        <label> Father Name:</label>
+        <input type="text" class="form-control" formControlName="fathersName" />
+      </div>
+      <div class="col-lg-6">
+        <label> Father Occupation:</label>
+        <input type="text" class="form-control" formControlName="fOccupation" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-6">
+        <label> Mother Name:</label>
+        <input type="text" class="form-control" formControlName="mothersName" />
+      </div>
+      <div class="col-lg-6">
+        <label> Mother Occupation:</label>
+        <input type="text" class="form-control" formControlName="mOccupation" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-6">
+        <label> Annual Income:</label>
+        <input type="text" class="form-control" formControlName="anIncome" />
+      </div>
+      <div class="col-lg-6">
+        <label> category:</label>
+        <input type="text" class="form-control" formControlName="category" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-6">
+        <label> branch:</label>
+        <select class="form-control" formControlName="branch">
+          <option>Please select</option>
+        </select>
+      </div>
+      <div class="col-lg-6">
+        <label> Sem:</label>
+        <select class="form-control" formControlName="sem">
+          <option>Please select</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-4">
+        <label> Adhar Number:</label>
+        <input type="text" class="form-control" formControlName="adhNumber" />
+      </div>
+      <div class="col-lg-4">
+        <label> Mobile Number:</label>
+        <input type="text" class="form-control" formControlName="mobileNumber" />
+      </div>
+      <div class="col-lg-4">
+        <label> Email:</label>
+        <input type="email" class="form-control" formControlName="emailValue" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-12">
+        <label> photo:</label>
+        <input #stdphoto type="file" class="form-control" formControlName="photo" />
+      </div>
+    </div>
+    <div class="form-group"></div>
+    <div class="form-group">
+      <div class="col-lg-12" style="text-align: center; margin-top: 1%; margin-bottom: 5%">
+        <button type="button" class="btn btn-default" (click)="submit(this)">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
