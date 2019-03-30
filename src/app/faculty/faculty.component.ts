@@ -23,18 +23,13 @@ export class FacultyComponent implements OnInit {
     if(this.fProfileForm.valid){
       this.currentFileUpload = this.selectedFiles.item(0);
       let mappedObject = this.mapValue(this.fProfileForm);
-      this.service.uploadAssignmentDetails(mappedObject).subscribe(dataUpload =>{
-        if(dataUpload.error){
-
-        }else {
-        this.service.uploadAssignment(this.currentFileUpload).subscribe(data => {
+        this.service.uploadAssignment(this.currentFileUpload, mappedObject).subscribe(data => {
           if(data.error){
   
           }else {
   
           }
-        });}
-      })
+        });
       
     }else {
       alert("Add error window here");
@@ -54,8 +49,8 @@ export class FacultyComponent implements OnInit {
       'branch': mappObject.controls['branch'].value,
       'sem': mappObject.controls['sem'].value,
       'subject': mappObject.controls['subject'].value,
-      'section': mappObject.controls['section'].value,
-      'document': mappObject.controls['file'].value
+      'section': mappObject.controls['section'].value
+      // 'document': mappObject.controls['file'].value
     }
     return notesObject;
   }

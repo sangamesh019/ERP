@@ -21,14 +21,14 @@ export class FacultyFunService {
     })
   };
 
-  uploadAssignment(file: File): Observable<any> {
+  uploadAssignment(file: File, mappedObject): Observable<any> {
     let fomrData = new FormData();
     fomrData.append('file', file);
-    
-    return this.http.post("http://localhost:8080/college/uploadAssignment", fomrData);
-  }
+    fomrData.append('branch', mappedObject.branch);
+    fomrData.append('sem', mappedObject.sem);
+    fomrData.append('subject', mappedObject.subject);
+    fomrData.append('section', mappedObject.section);
 
-  uploadAssignmentDetails(mappedObject): Observable<any>{
-    return this.http.post("http://localhost:8080/college/uploadAssignmentDetails", mappedObject);
+    return this.http.post("http://localhost:8080/college/uploadAssignment", fomrData);
   }
 }

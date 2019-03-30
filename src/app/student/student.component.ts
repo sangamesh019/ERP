@@ -11,23 +11,32 @@ export class StudentComponent implements OnInit {
 
   public studentInfo: [];
   public assignmentList: [];
+  public stuList: [];
   public profileForm: FormGroup;
+  assignmentShow: boolean;
   constructor(public service: StudentServieService) { }
 
   ngOnInit() {
+    this.assignmentShow = false;
     this.service.getStudentByEmail().subscribe(data => {
       this.studentInfo = data;
     });
 
   }
+
+  showAssignment() {
+    this.assignmentShow = !this.assignmentShow;
+  }
   getAssignment() {
     this.service.getAssignmentList().subscribe(assignment => {
-        this.assignmentList = assignment;
+      this.assignmentList = assignment;
     });
 
-//     var bytes = this.assignmentList;
-// var uints = new UInt8Array(bytes);
-// var base64 = btoa(String.fromCharCode(null, uints));
-// var url = 'data:image/jpeg;base64,' + base64;
+  }
+  
+  listAllStudents(){
+    this.service.getStuList().subscribe(stuList => {
+      this.stuList = stuList;
+    });
   }
 }

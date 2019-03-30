@@ -11,9 +11,13 @@ export class StudentSignupComponent implements OnInit {
 
   profileForm: FormGroup;
   @ViewChild("stdphoto") stdphoto;
+  currentFileUpload: File;
+  selectedFiles: FileList;
+
   constructor(private fb: FormBuilder, public service: StudentServieService) { }
 
   ngOnInit() {
+
     this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -37,12 +41,24 @@ export class StudentSignupComponent implements OnInit {
     });
   }
 
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+  
+
   submit() {
 
+    this.currentFileUpload = this.selectedFiles.item(0);
     if (this.profileForm.valid) {
       let values = this.mapStudentDetails(this.profileForm);
       this.service.signUp(values).subscribe(status => {
-        alert(status);
+        if (status) {
+          this.service.signUpFile(this.currentFileUpload, values.mNumber).subscribe(result => {
+            alert(result);
+          })
+        } else {
+
+        }
       });
     } else {
 
@@ -65,7 +81,7 @@ export class StudentSignupComponent implements OnInit {
       'adhNumber': student.controls['adhNumber'].value,
       'mNumber': student.controls['mobileNumber'].value,
       'email': student.controls['emailValue'].value,
-      File : this.stdphoto.nativeElement.files[0]
+      // 'photo': this.stdphoto.nativeElement.files[0]
     }
     return studentDetails;
   }

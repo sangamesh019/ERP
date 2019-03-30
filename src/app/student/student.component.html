@@ -28,17 +28,33 @@
             </li>
           </ul>
         </li>
-        <li>
-          <a href="#">View results</a>
+        <li (click)="listAllStudents()">
+          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> View results</a>
         </li>
-        <li (click)="getAssignment()">
+        <li (click)="showAssignment()">
           <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Assignments</a>
         </li>
       </ul>
     </nav>
   </div>
+
+  <div class="col-lg-8">
+    <table class="table">
+      <tbody *ngFor="let stu of stuList; let i = index">
+        <tr>
+          <td>{{stu.fName}}</td>
+          <td>{{stu.mNumber}}</td>
+          <td><img src="data:image/jpeg;base64,{{stu.photo}}" style="width: 50px; height: 50px"/></td>
+          <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
+        </tr>
+      </tbody>
+      </table>
+  </div>
+
+  <div *ngIf="assignmentShow">
   <div class="col-lg-8">
     <!-- Page Content -->
+    <div  (click)="getAssignment()"> getAssignment </div>
     <div id="content">
       <h2>List of Contents</h2>
       <p></p>
@@ -61,6 +77,7 @@
       </table>
 
     </div>
+  </div>
   </div>
   </div>
 <!-- </div> -->
