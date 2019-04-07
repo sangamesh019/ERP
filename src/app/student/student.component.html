@@ -1,21 +1,24 @@
 <!-- <div class="container"> -->
-  <div class="wrapper">
-<div class="col-lg-4">
+<div class="wrapper">
+  <div class="col-lg-4">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>Home page student pic</h3>
+        <div *ngIf="studentInfo !== null">
+          <h3>{{studentInfo.fName}}</h3>
+
+          <img src="data:image/jpeg;base64,{{studentInfo.photo}}" style="width: 100%; height: 100%"/>
+        </div>
         <ul class="list-unstyled components">
-        <li>
-            <a href="#">Edit profile</a>
+          <li>
+              <a routerLink="/studentSignup" >Edit profile</a>
           </li>
         </ul>
       </div>
 
       <ul class="list-unstyled components">
         <p>What you can do.</p>
-        <li class="active" >
-          <a  href="" data-toggle="collapse" aria-expanded="false"
-           class="dropdown-toggle">Notes</a>
+        <li class="active">
+          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Notes</a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
             <li>
               <a href="#">Subject 1</a>
@@ -44,40 +47,42 @@
         <tr>
           <td>{{stu.fName}}</td>
           <td>{{stu.mNumber}}</td>
-          <td><img src="data:image/jpeg;base64,{{stu.photo}}" style="width: 50px; height: 50px"/></td>
+          <td><img src="data:image/jpeg;base64,{{stu.photo}}" style="width: 50px; height: 50px" /></td>
           <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
         </tr>
       </tbody>
-      </table>
+    </table>
   </div>
 
   <div *ngIf="assignmentShow">
-  <div class="col-lg-8">
-    <!-- Page Content -->
-    <div  (click)="getAssignment()"> getAssignment </div>
-    <div id="content">
-      <h2>List of Contents</h2>
-      <p></p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Subect </th>
-            <th>File name</th>
-            <th>download here</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let assignments of assignmentList; let i = index">
-          <tr>
-            <td>{{assignments.subject}}</td>
-            <td>{{assignments.fileName}}</td>
-            <td><img src="data:image/jpeg;base64,{{assignments.data}}" style="width: 50px; height: 50px"/></td>
-            <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-lg-8">
+      <!-- Page Content -->
+      <div (click)="getAssignment()"> getAssignment </div>
+      <div id="content">
+        <h2>List of Contents</h2>
+        <p></p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Subect </th>
+              <th>File name</th>
+              <th>download here</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let assignments of assignmentList; let i = index">
+            <tr>
+              <td>{{assignments.subject}}</td>
+              <td>{{assignments.fileName}}</td>
+              <td><img src="data:image/jpeg;base64,{{assignments.data}}" style="width: 50px; height: 50px" /></td>
+              <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}">
+                  <div>Download File</div>
+                </a></td>
+            </tr>
+          </tbody>
+        </table>
 
+      </div>
     </div>
   </div>
-  </div>
-  </div>
+</div>
 <!-- </div> -->

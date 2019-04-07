@@ -31,4 +31,20 @@ export class FacultyFunService {
 
     return this.http.post("http://localhost:8080/college/uploadAssignment", fomrData);
   }
+  signUp(faculty): Observable<any> { 
+    return this.http.post("http://localhost:8080/college/signUpFaculty", faculty);
+  }
+
+  signUpFile(photo: File, email: string): Observable<any> { 
+    let fomrData = new FormData();
+    fomrData.append('file', photo);
+    fomrData.append('email', email);
+
+    return this.http.post("http://localhost:8080/college/signUpFacultyPhoto",fomrData);
+  }
+
+  getFacEmail() : Observable<any>{
+    let email = localStorage.getItem('email'); 
+    return this.http.get("http://localhost:8080/college/faculty/"+email);
+  }
 }

@@ -1,7 +1,17 @@
 <div class="container">
-  <h1>Students Signup page</h1>
+
+  <h1 *ngIf="!typeOfPage">Students Signup page</h1>
+  <h1 *ngIf="typeOfPage">Edit profile</h1>
   <form [formGroup]="profileForm">
     <div class="form-group">
+      <div class="col-lg-4">
+        <label for="firstName"> USN:</label>
+        <input type="text" class="form-control" id="usn" formControlName="usn" />
+      </div>
+      <div class="col-lg-4">
+        <label for="firstName"> Password:</label>
+        <input type="text" class="form-control" id="password" formControlName="password" />
+      </div>
       <div class="col-lg-4">
         <label for="firstName"> First Name:</label>
         <input type="text" class="form-control" id="firstName" formControlName="firstName" />
@@ -50,7 +60,7 @@
     <div class="form-group">
       <div class="col-lg-6">
         <label> Father Name:</label>
-        <input type="text" class="form-control" formControlName="fathersName" />
+        <input type="text" class="form-control" formControlName="fatherName" />
       </div>
       <div class="col-lg-6">
         <label> Father Occupation:</label>
@@ -60,7 +70,7 @@
     <div class="form-group">
       <div class="col-lg-6">
         <label> Mother Name:</label>
-        <input type="text" class="form-control" formControlName="mothersName" />
+        <input type="text" class="form-control" formControlName="motherName" />
       </div>
       <div class="col-lg-6">
         <label> Mother Occupation:</label>
@@ -116,7 +126,7 @@
     <div class="form-group"></div>
     <div class="form-group">
       <div class="col-lg-12" style="text-align: center; margin-top: 1%; margin-bottom: 5%">
-        <button type="button" class="btn btn-default" (click)="submit(this)">
+        <button type="button" class="btn btn-default" (click)="submit()">
           Submit
         </button>
       </div>

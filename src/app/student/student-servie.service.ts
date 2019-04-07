@@ -17,8 +17,9 @@ export class StudentServieService {
     })
   };
   
-   getStudentByEmail(): Observable<any> { 
-    return this.http.get("http://localhost:8080/college/student/sam1@test.com", this.httpOptions);
+   getStudentByUsn(): Observable<any> {
+     let usn = localStorage.getItem('id'); 
+    return this.http.get("http://localhost:8080/college/student/"+usn, this.httpOptions);
   }
 
   getStudentlist(): Observable<any> { 

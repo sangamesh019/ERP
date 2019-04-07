@@ -15,6 +15,7 @@ import { FacultySignupComponent } from './faculty-signup/faculty-signup.componen
 import { StudentServieService } from './student/student-servie.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CanActiveStudentService } from './can-active-student.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [StudentServieService],
+  providers: [StudentServieService, CanActiveStudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
