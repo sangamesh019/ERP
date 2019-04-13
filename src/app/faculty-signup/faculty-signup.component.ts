@@ -15,6 +15,9 @@ export class FacultySignupComponent implements OnInit {
   currentFileUpload: File;
   selectedFiles: FileList;
   typeOfPage: boolean;
+  errors: boolean;
+  errorList: string[] = [];
+
   public faculty = {
     fName: '',
     mName: '',
@@ -27,10 +30,10 @@ export class FacultySignupComponent implements OnInit {
     adhNumber: '',
     mNumber: '',
     email: '',
-   
     password: '',
     aIncome: '',
-    designation: ''
+    designation: '',
+    expYears: ''
   };
 
   constructor(
@@ -51,50 +54,47 @@ export class FacultySignupComponent implements OnInit {
     }
     this.typeOfPage = false;
     this.profileForm = this.initializeValues(this.faculty, this.fb);
-
-    // this.profileForm = this.fb.group({
-    //   firstName: ['', Validators.required],
-    //   lastName: ['', Validators.required],
-    //   middleName: [''],
-    //   gender: [''],
-    //   dob: ['', Validators.required],
-    //   addressP: ['', Validators.required],
-    //   anIncome: [''],
-    //   category: [''],
-    //   branch: [''],
-    //   adhNumber: [''],
-    //   mobileNumber: [''],
-    //   email: ['', Validators.email],
-    //   photo: [''],
-    //   designation: ['', Validators.required],
-    //   password: ['', Validators.required]
-    // });
   }
 
   initializeValues(studentvalues, studentBuilder: FormBuilder) {
     return studentBuilder.group({
-      firstName: [studentvalues.fName !== ''? studentvalues.fName: '', Validators.required],
-      lastName: [studentvalues.lName !== ''? studentvalues.lName: '', Validators.required],
-      middleName: [studentvalues.mName !== ''? studentvalues.mName: ''],
-      gender: [studentvalues.gender !== ''? studentvalues.gender: ''],
-      dob: [studentvalues.dob !== ''? studentvalues.dob: '', Validators.required],
-      addressP: [studentvalues.address !== ''? studentvalues.address: '', Validators.required],
-      anIncome: [studentvalues.aIncome !== ''? studentvalues.aIncome: ''],
-      category: [studentvalues.categaroy !== ''? studentvalues.categaroy: ''],
-      branch: [studentvalues.branch !== ''? studentvalues.branch: ''],
-      adhNumber: [studentvalues.adhNumber !== ''? studentvalues.adhNumber: ''],
-      mobileNumber: [studentvalues.mNumber !== ''? studentvalues.mNumber: ''],
-      email: [studentvalues.email !== ''? studentvalues.email: '', Validators.email],
+      firstName: [studentvalues.fName !== '' ? studentvalues.fName : '', Validators.required],
+      lastName: [studentvalues.lName !== '' ? studentvalues.lName : '', Validators.required],
+      middleName: [studentvalues.mName !== '' ? studentvalues.mName : ''],
+      gender: [studentvalues.gender !== '' ? studentvalues.gender : ''],
+      dob: [studentvalues.dob !== '' ? studentvalues.dob : '', Validators.required],
+      addressP: [studentvalues.address !== '' ? studentvalues.address : '', Validators.required],
+      anIncome: [studentvalues.aIncome !== '' ? studentvalues.aIncome : '',
+      [Validators.minLength(10),
+      Validators.maxLength(12),
+      Validators.pattern('[0-9]+')]],
+      category: [studentvalues.category !== '' ? studentvalues.category : ''],
+      branch: [studentvalues.branch !== '' ? studentvalues.branch : ''],
+      adhNumber: [studentvalues.adhNumber !== '' ? studentvalues.adhNumber : '',
+      [Validators.minLength(10),
+      Validators.maxLength(12),
+      Validators.pattern('[0-9]+')]
+      ],
+      mobileNumber: [studentvalues.mNumber !== '' ? studentvalues.mNumber : '',
+      [Validators.minLength(10),
+      Validators.maxLength(12),
+      Validators.pattern('[0-9]+')]],
+      email: [studentvalues.email !== '' ? studentvalues.email : '', Validators.email],
       photo: [''],
-      // usn: [studentvalues.usn !== ''? studentvalues.usn: '', Validators.required],
-      password: [studentvalues.password !== ''? studentvalues.password: '', Validators.required],
-      designation: [studentvalues.designation !== ''? studentvalues.designation: '', Validators.required],
+      expYears: [studentvalues.expYears !== '' ? studentvalues.expYears : '',
+      [Validators.minLength(1),
+      Validators.maxLength(2),
+      Validators.pattern('[0-9]+')]],
+      password: [studentvalues.password !== '' ? studentvalues.password : '', Validators.required],
+      designation: [studentvalues.designation !== '' ? studentvalues.designation : '', Validators.required],
     });
   }
 
-  submit(){
-    this.currentFileUpload = this.selectedFiles.item(0);
+  submit() {
+    
+    
     if (this.profileForm.valid) {
+      this.currentFileUpload = this.selectedFiles.item(0);
       let values = this.mapFacultyDetails(this.profileForm);
       this.service.signUp(values).subscribe(status => {
         if (status) {
@@ -113,14 +113,20 @@ export class FacultySignupComponent implements OnInit {
         }
       });
     } else {
-      alert('invalid');
+      this.errors =true;
+      // this.error = "Error"
+      Object.keys(this.profileForm.controls).forEach(key => {
+        if(this.profileForm.get(key).hasError){
+          this.errorList.push(key);
+        }
+      });
     }
   }
   selectFile(event) {
     this.selectedFiles = event.target.files;
   }
   mapFacultyDetails(faculty: FormGroup) {
-    
+
     let facultyDetails = {
       designation: faculty.controls["designation"].value,
       fName: faculty.controls["firstName"].value,

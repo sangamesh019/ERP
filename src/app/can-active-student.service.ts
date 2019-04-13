@@ -13,7 +13,7 @@ export class CanActiveStudentService implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot){
         let who = localStorage.getItem('who');
-        if(who === 'student'){
+        if(who === 'Student'){
             return true;
         } else {
             return false;

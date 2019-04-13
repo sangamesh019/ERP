@@ -1,9 +1,10 @@
 <div class="container" style="margin-bottom: 3%">
-    <h1 *ngIf="typeOfPage">Faculty Signup page</h1>
-    <h1 *ngIf="!typeOfPage">Faculty Edit</h1>
+    <h1 *ngIf="!typeOfPage">Faculty Signup page</h1>
+    <h1 *ngIf="typeOfPage">Faculty Edit</h1>
+    <div  *ngFor="let error of errorList" class="alert alert-danger">Error in {{error}} field</div>
     <form [formGroup]="profileForm">
         <div class="form-group">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
               <label>
                   Designation:</label>
               <select class="form-control" formControlName="designation">
@@ -12,22 +13,27 @@
                 <option>Admin</option>
               </select>
             </div>
+            <div class="col-lg-6">
+                <label for="expYears">
+                    Years of experiance:</label>
+                    <input type="text" class="form-control validate" id="expYears" formControlName="expYears" maxlength="2">
+              </div>
           </div>
       <div class="form-group">
         <div class="col-lg-4">
           <label for="firstName">
             First Name:</label>
-          <input type="text" class="form-control" id="firstName" formControlName="firstName">
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" maxlength="40">
         </div>
         <div class="col-lg-4">
           <label>
             Middle Name:</label>
-          <input type="text" class="form-control" formControlName="middleName">
+          <input type="text" class="form-control" formControlName="middleName" maxlength="40">
         </div>
         <div class="col-lg-4">
           <label>
             Last Name:</label>
-          <input type="text" class="form-control" formControlName="lastName">
+          <input type="text" class="form-control" formControlName="lastName" maxlength="40">
         </div>
       </div>
       <div class="form-group">
@@ -54,19 +60,19 @@
         <div class="col-lg-12">
           <label>
             Permanent Address:</label>
-          <input type="text" class="form-control" formControlName="addressP">
+          <input type="text" class="form-control" formControlName="addressP" maxlength="100">
         </div>
       </div>
       <div class="form-group">
         <div class="col-lg-6">
           <label>
             Annual Income:</label>
-          <input type="text" class="form-control" formControlName="anIncome">
+          <input type="text" class="form-control" formControlName="anIncome" maxlength="10">
         </div>
         <div class="col-lg-6">
           <label>
             category:</label>
-          <input type="text" class="form-control" formControlName="category">
+          <input type="text" class="form-control" formControlName="category" maxlength="10">
         </div>
   
       </div>
@@ -84,7 +90,7 @@
         <div class="col-lg-4">
           <label>
             Adhar Number:</label>
-          <input type="text" class="form-control" formControlName="adhNumber">
+          <input type="text" class="form-control" formControlName="adhNumber" maxlength="10">
         </div>
         <div class="col-lg-4">
           <label>
@@ -94,12 +100,12 @@
         <div class="col-lg-4">
           <label>
             Email:</label>
-          <input type="email" class="form-control" formControlName="email">
+          <input type="email" class="form-control" formControlName="email" maxlength="20">
         </div>
         <div class="col-lg-4">
             <label>
               Password:</label>
-            <input type="password" class="form-control" formControlName="password">
+            <input type="password" class="form-control" formControlName="password" maxlength="10">
           </div>
       </div>
       <div class="form-group">

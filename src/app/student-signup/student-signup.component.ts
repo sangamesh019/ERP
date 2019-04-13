@@ -103,7 +103,7 @@ export class StudentSignupComponent implements OnInit {
       firstName: [studentvalues.fName !== ''? studentvalues.fName: '', Validators.required],
       lastName: [studentvalues.lName !== ''? studentvalues.lName: '', Validators.required],
       middleName: [studentvalues.mName !== ''? studentvalues.mName: ''],
-      gender: [studentvalues.gender !== ''? studentvalues.gender: ''],
+      gender: [studentvalues.gender !== ''? studentvalues.gender: '', Validators.required],
       dob: [studentvalues.dob !== ''? studentvalues.dob: '', Validators.required],
       addressP: [studentvalues.pAddress !== ''? studentvalues.pAddress: '', Validators.required],
       addressT: [studentvalues.cAddress !== ''? studentvalues.cAddress: ''],

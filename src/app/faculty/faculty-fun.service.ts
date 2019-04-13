@@ -28,6 +28,7 @@ export class FacultyFunService {
     fomrData.append('sem', mappedObject.sem);
     fomrData.append('subject', mappedObject.subject);
     fomrData.append('section', mappedObject.section);
+    fomrData.append('type', mappedObject.data);
 
     return this.http.post("http://localhost:8080/college/uploadAssignment", fomrData);
   }
@@ -44,7 +45,15 @@ export class FacultyFunService {
   }
 
   getFacEmail() : Observable<any>{
-    let email = localStorage.getItem('email'); 
+    let email = localStorage.getItem('id'); 
     return this.http.get("http://localhost:8080/college/faculty/"+email);
+  }
+
+  getFacList(branch) : Observable<any>{
+    return this.http.get("http://localhost:8080/college/facultList/"+branch);
+  }
+
+  assignFacultySubject(assignFacultySubject): Observable<any>{
+    return this.http.post("http://localhost:8080/college/assignFacultySubject", assignFacultySubject);
   }
 }
