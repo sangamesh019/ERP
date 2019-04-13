@@ -14,6 +14,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
   public stuList: [];
   public profileForm: FormGroup;
   assignmentShow: boolean;
+  loader: boolean;
   constructor(public service: StudentServieService) { }
 
   ngOnInit() {
@@ -34,8 +35,10 @@ export class StudentComponent implements OnInit, AfterViewInit {
     this.assignmentShow = !this.assignmentShow;
   }
   getAssignment() {
-    this.service.getAssignmentList().subscribe(assignment => {
+    this.loader = true;
+    this.service.getAssignmentList(this.studentInfo).subscribe(assignment => {
       this.assignmentList = assignment;
+      this.loader = false;
     });
 
   }

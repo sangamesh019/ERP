@@ -73,7 +73,7 @@
             <tr>
               <td>{{assignments.subject}}</td>
               <td>{{assignments.fileName}}</td>
-              <td><img src="data:image/jpeg;base64,{{assignments.data}}" style="width: 50px; height: 50px" /></td>
+              <!-- <td><img src="data:image/jpeg;base64,{{assignments.data}}" style="width: 50px; height: 50px" /></td> -->
               <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}">
                   <div>Download File</div>
                 </a></td>
@@ -84,5 +84,8 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="loader">
+<img src="/assets/gif.gif" style="width: 10%">
 </div>
 <!-- </div> -->
