@@ -8,6 +8,7 @@ import { StudentSignupComponent } from "./student-signup/student-signup.componen
 import { FacultySignupComponent } from "./faculty-signup/faculty-signup.component";
 import { CanActiveStudentService } from './can-active-student.service';
 import { CanactiveFacultyService } from './canactive-faculty.service';
+import { FacultyprofileComponent } from './faculty/facultyprofile/facultyprofile.component';
 
 const appRoutes: Routes = [
   /*{ path: "student", component: StudentComponent},
@@ -36,7 +37,10 @@ const appRoutes: Routes = [
     path: "facultySignup", component: FacultySignupComponent
     // canActivate: [CanActiveStudentService]
   },
-
+  {
+    path: "facultyEdit", component: FacultyprofileComponent
+    // canActivate: [CanActiveStudentService]
+  },
   // { path: "login", component: LoginComponent },
   { path: "**", component: HomeComponent }
 ];

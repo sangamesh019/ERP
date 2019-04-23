@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from './login/login.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentChecked {
   title = 'collegeERP';
 
   profileForm: FormGroup;
@@ -18,15 +18,19 @@ export class AppComponent implements OnInit {
   loginUser: boolean;
   role: boolean;
   showModal: boolean;
+  whoLogged: string;
 
   // fb: FormBuilder;
 
-  constructor(public fb: FormBuilder, public service: LoginService, public route: Router) {
+  constructor(public fb: FormBuilder, public service: LoginService, public route: Router, public cdr: ChangeDetectorRef) {
 
   }
   ngOnInit() {
+    
     if(localStorage.getItem('who')){
+      
       this.loginUser = true;
+      this.whoLogged = localStorage.getItem('who');
     }else {
       this.loginUser = false;
     }
@@ -38,6 +42,16 @@ export class AppComponent implements OnInit {
     });
   }
 
+  ngAfterContentChecked(){
+    this.cdr.detectChanges;
+    if(localStorage.getItem('who')){
+      
+      this.loginUser = true;
+      this.whoLogged = localStorage.getItem('who');
+    }else {
+      this.loginUser = false;
+    }
+  }
   login() {
     if (this.profileForm.valid) {
       this.service.loginUser({ "usn": this.profileForm.controls['userName'].value, "password": this.profileForm.controls['password'].value, 'role': this.profileForm.controls['who'].value }).subscribe(result => {
@@ -77,6 +91,14 @@ export class AppComponent implements OnInit {
     this.showModal = true;
   }
 
+  signUpStudent(){
+    document.getElementById("modalLoginForm").click();
+  }
+
+  
+  signUpFac(){
+    document.getElementById("modalLoginForm").click();
+  }
   get userName() { return this.profileForm.get('userName'); }
   get password() { return this.profileForm.get('password'); }
 }

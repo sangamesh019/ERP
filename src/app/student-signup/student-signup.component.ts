@@ -20,6 +20,8 @@ export class StudentSignupComponent implements OnInit {
   currentFileUpload: File;
   selectedFiles: FileList;
   typeOfPage: boolean;
+  branchList: string[] = ['EEE', 'EC', 'CS', 'MECH', 'IS'];
+  semList: number[] = [1,2,3,4,5,6,7,8];
 
   public student = {
     fName: '',
@@ -72,8 +74,10 @@ export class StudentSignupComponent implements OnInit {
   }
 
   submit() {
-    this.currentFileUpload = this.selectedFiles.item(0);
+    
     if (this.profileForm.valid) {
+      if(this.profileForm.controls['branch'].value != '' || this.profileForm.controls['sem'].value != '' ) {
+      this.currentFileUpload = this.selectedFiles.item(0);
       let values = this.mapStudentDetails(this.profileForm);
       this.service.signUp(values).subscribe(status => {
         if (status) {
@@ -91,6 +95,9 @@ export class StudentSignupComponent implements OnInit {
         } else {
         }
       });
+    } else {
+      alert('select branch and sem');
+    }
     } else {
       alert('invalid')
     }

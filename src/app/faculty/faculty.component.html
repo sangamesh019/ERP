@@ -3,8 +3,8 @@
   <div class="col-lg-4">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>Home page faculty {{facInfo.fName}}</h3>
-        <img src="data:image/jpeg;base64,{{facInfo.photo}}" style="width: 100%; height: 100%" />
+        <h3>Home page faculty {{ facInfo.fName }}</h3>
+        <img src="data:image/jpeg;base64,{{ facInfo.photo }}" style="width: 100%; height: 100%" />
         <ul class="list-unstyled components">
           <li>
             <a routerLink="/facultySignup">Edit profile</a>
@@ -16,35 +16,23 @@
         <li (click)="assignNotes()">
           <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">upload Notes</a>
         </li>
-        <!-- <li>
-          <a href="#">upload results</a>
+        <li (click)="uploadResult()">
+          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">upload Result</a>
         </li>
-        <li (click)="uploadAssignment()">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">upload Assignments</a>
-        </li> -->
         <li *ngIf="!hod" (click)="assignSubject()">
           <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Assign subect to faculty</a>
         </li>
       </ul>
     </nav>
   </div>
-  <div class="col-lg-8">
-    <!-- Page Content -->
-    <!-- <div id="content"> -->
-    <!-- <h2>List of Contents</h2> -->
-    <p></p>
-    <!-- <div class="container"> -->
+  <div class="col-lg-6">
     <h1>Faculty activity</h1>
     <div *ngIf="hodActivity">
       <h2>Upload notes</h2>
       <form [formGroup]="fProfileForm">
         <div class="form-group">
-          <label>
-            Upload details:</label>
+          <label> Upload details:</label>
           <select type="text" class="form-control" style="width: 50% !important" id="data" formControlName="data">
-            <option id="a" selected="selected">
-              Results
-            </option>
             <option id="b">
               Notes
             </option>
@@ -54,8 +42,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="branch">
-            branch:</label>
+          <label for="branch"> branch:</label>
           <select type="text" class="form-control" style="width: 50% !important" id="branch" formControlName="branch">
             <option id="EEE" selected="selected">
               EEE
@@ -65,17 +52,15 @@
             </option>
           </select>
 
-          <label>
-            Sem:</label>
+          <label> Sem:</label>
           <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="sem">
-              <option *ngFor="let sem of Sems">
-                  {{sem}}
-                </option>
+            <option *ngFor="let sem of Sems">
+              {{ sem }}
+            </option>
           </select>
         </div>
         <div class="form-group">
-          <label>
-            section:</label>
+          <label> section:</label>
           <select type="text" class="form-control" style="width: 50% !important" id="section" formControlName="section">
             <option id="a" value="a" selected="selected">
               "A" section
@@ -89,18 +74,18 @@
           </select>
         </div>
         <div class="form-group">
-          <label>
-            Subject Name:</label>
-          <input type="text" class="form-control" style="width: 50% !important" formControlName="subject">
+          <label> Subject Name:</label>
+          <input type="text" class="form-control" style="width: 50% !important" formControlName="subject" />
         </div>
         <div class="form-group">
-          <label>
-            Notes Name:</label>
+          <label> Notes Name:</label>
           <input type="file" class="form-control" style="width: 50% !important" formControlName="file"
-            (change)="selectFile($event)">
+            (change)="selectFile($event)" />
         </div>
         <div class="form-group">
-          <button type="text" class="form-control" style="width: 50% !important" (click)="uploadNotes()">upload</button>
+          <button type="text" class="form-control" id="assignSub" (click)="uploadNotes()">
+            upload
+          </button>
         </div>
       </form>
     </div>
@@ -108,27 +93,25 @@
       <h2>Assign faculty</h2>
       <form [formGroup]="fSubject">
         <div class="form-group">
-          <label>
-            select faculty:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="facEmail" formControlName="facEmail">
-              <option>Please select</option>
+          <label> select faculty:</label>
+          <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
+            formControlName="facEmail">
+            <option>Please select</option>
             <option *ngFor="let fac of facultyList">
-              {{fac.fName}}
+              {{ fac.fName }}
             </option>
           </select>
         </div>
         <div class="form-group">
-          <label>
-            Sem:</label>
+          <label> Sem:</label>
           <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="sem">
             <option *ngFor="let sem of Sems">
-              {{sem}}
+              {{ sem }}
             </option>
           </select>
         </div>
         <div class="form-group">
-          <label>
-            section:</label>
+          <label> section:</label>
           <select type="text" class="form-control" style="width: 50% !important" id="section" formControlName="section">
             <option id="a" value="a" selected="selected">
               "A" section
@@ -142,13 +125,73 @@
           </select>
         </div>
         <div class="form-group">
-          <label>
-            Subject Name:</label>
-          <input type="text" class="form-control" style="width: 50% !important" formControlName="subject">
+          <label> Subject Name:</label>
+          <input type="text" class="form-control" style="width: 50% !important" formControlName="subject" />
         </div>
         <div class="form-group">
-          <button type="text" class="form-control" style="width: 50% !important" (click)="assignSubjectFaculty()">upload</button>
+          <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
+            (click)="assignSubjectFaculty()">
+            Assign Subject
+          </button>
         </div>
       </form>
     </div>
+    <div>
+      <div *ngIf="showResult">
+        <h2>Upload results</h2>
+        <form [formGroup]="fresult">
+          <div class="form-group">
+            <label> select internals:</label>
+            <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
+              formControlName="internals">
+              <option>Please select</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label> Subect:</label>
+            <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="subject">
+              <option>Please select</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label> Student:</label>
+            <select type="text" class="form-control" style="width: 50% !important" id="section"
+              formControlName="Student">
+              <option id="a" value="a" selected="selected">
+                "A" section
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label> Internal Marks:</label>
+            <input type="text" class="form-control" style="width: 50% !important" formControlName="internMarks" />
+          </div>
+          <div class="form-group">
+            <label> Assignment Marks:</label>
+            <input type="text" class="form-control" style="width: 50% !important" formControlName="assignMarks" />
+          </div>
+          <div class="form-group">
+            <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
+              (click)="assignSubjectFaculty()">
+              Assign Subject
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+  <div class="col-lg-2">
+    <table>
+      <tr>
+        <th>Sem</th>
+        <th>Subject</th>
+      </tr>
+      <tbody>
+        <tr *ngFor="let sub of subjectList">
+          <td>{{ sub.sem }}</td>
+          <td>{{ sub.subject }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

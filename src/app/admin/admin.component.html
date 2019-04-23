@@ -1,3 +1,71 @@
-<p>
-  admin works!
-</p>
+<!-- <div class="container"> -->
+<div class="wrapper">
+  <div class="col-lg-4">
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>Welcome Admin {{ facInfo.fName }}</h3>
+        <img
+          src="data:image/jpeg;base64,{{ facInfo.photo }}"
+          style="width: 100%; height: 100%"
+        />
+        <ul class="list-unstyled components">
+          <li>
+            <a routerLink="/facultySignup">Edit profile</a>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li (click)="enableUsers()">
+          <a
+            href=""
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle"
+            >Enable users</a
+          >
+        </li>
+        <li (click)="uploadEvent()">
+          <a
+            href=""
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle"
+            >upload events</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-lg-6">
+    <!-- Page Content -->
+    <!-- <div id="content"> -->
+    <!-- <h2>List of Contents</h2> -->
+    <p></p>
+    <!-- <div class="container"> -->
+    <h1>Admin activity</h1>
+    <h2 *ngIf="showListOfStudents">List of Sudents</h2>
+    <table class="table">
+        <tbody *ngFor="let stu of listOfStudents; let i = index">
+          <tr>
+            <td>{{stu.fName}}</td>
+            <td>{{stu.mNumber}}</td>
+            <td><input type="checkbox" ></td>
+            <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
+          </tr>
+        </tbody>
+      </table>
+      
+    <h2 *ngIf="showListOfFaculty">List of faculty</h2>
+    <table class="table">
+        <tbody *ngFor="let fac of listOffaculty; let i = index">
+          <tr>
+            <td>{{fac.fName}}</td>
+            <td>{{fac.mNumber}}</td>
+            <td><img src="data:image/jpeg;base64,{{fac.photo}}" style="width: 50px; height: 50px" /></td>
+            <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

@@ -15,12 +15,16 @@ import { FacultyFunService } from './faculty-fun.service';
 export class FacultyComponent implements OnInit {
   fProfileForm: FormGroup;
   fSubject: FormGroup;
+  fresult: FormGroup;
+  showResult: boolean;
+
   constructor(private fb: FormBuilder, private service: FacultyFunService, public cdr: ChangeDetectorRef) { }
 
   currentFileUpload: File;
   selectedFiles: FileList;
   hodActivity: boolean;
   facultyList: [];
+  subjectList: Object;
   Sems: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
   public facInfo = {
     fName: '',
@@ -36,7 +40,8 @@ export class FacultyComponent implements OnInit {
     email: '',
     password: '',
     aIncome: '',
-    designation: ''
+    designation: '',
+    photo: ''
   };
   hod: boolean;
 
@@ -75,10 +80,13 @@ export class FacultyComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.showResult = false;
     this.hodActivity = true;
     let that = this;
     this.service.getFacEmail().subscribe(data => {
+      
       that.facInfo = data;
+      this.getSubAssignedToMe();
       if (that.facInfo.designation === 'HOD') {
         this.hod = false;
       } else {
@@ -101,6 +109,28 @@ export class FacultyComponent implements OnInit {
       sem: ['1', Validators.required],
       section: ['a'],
       subject: ['', Validators.required]
+    });
+    
+    this.fresult = this.fb.group({
+      internals: ['', Validators.required],
+      subject: ['', Validators.required],
+      Student: ['', Validators.required],
+      internMarks: ['', Validators.required],
+      assignMarks: ['', [Validators.pattern('[0-9]+'), Validators.required]]
+    });
+  }
+
+  uploadResult(){
+    this.showResult = true; 
+  }
+  getSubAssignedToMe(){
+    let that = this;
+    this.service.getSubjectAssignedToFaculty(that.facInfo.branch, that.facInfo.fName).subscribe(subjects =>{
+      if(subjects!= null){
+        that.subjectList = subjects;
+      } else {
+        alert('No subject assigned')
+      }
     });
   }
   mapValue(mappObject: FormGroup) {

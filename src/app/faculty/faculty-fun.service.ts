@@ -32,28 +32,35 @@ export class FacultyFunService {
 
     return this.http.post("http://localhost:8080/college/uploadAssignment", fomrData);
   }
-  signUp(faculty): Observable<any> { 
+  signUp(faculty): Observable<any> {
     return this.http.post("http://localhost:8080/college/signUpFaculty", faculty);
   }
+  editFaculty(faculty): Observable<any> {
+    return this.http.post("http://localhost:8080/college/editFaculty", faculty);
+  }
 
-  signUpFile(photo: File, email: string): Observable<any> { 
+  signUpFile(photo: File, email: string): Observable<any> {
     let fomrData = new FormData();
     fomrData.append('file', photo);
     fomrData.append('email', email);
 
-    return this.http.post("http://localhost:8080/college/signUpFacultyPhoto",fomrData);
+    return this.http.post("http://localhost:8080/college/signUpFacultyPhoto", fomrData);
   }
 
-  getFacEmail() : Observable<any>{
-    let email = localStorage.getItem('id'); 
-    return this.http.get("http://localhost:8080/college/faculty/"+email);
+  getFacEmail(): Observable<any> {
+    let email = localStorage.getItem('id');
+    return this.http.get("http://localhost:8080/college/faculty/" + email);
   }
 
-  getFacList(branch) : Observable<any>{
-    return this.http.get("http://localhost:8080/college/facultList/"+branch);
+  getFacList(branch): Observable<any> {
+    return this.http.get("http://localhost:8080/college/facultList/" + branch);
   }
 
-  assignFacultySubject(assignFacultySubject): Observable<any>{
+  assignFacultySubject(assignFacultySubject): Observable<any> {
     return this.http.post("http://localhost:8080/college/assignFacultySubject", assignFacultySubject);
+  }
+
+  getSubjectAssignedToFaculty(branch, email): Observable<any> {
+    return this.http.get("http://localhost:8080/college/getSubjectAssigned/" + branch + "/" + email);
   }
 }

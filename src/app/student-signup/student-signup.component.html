@@ -92,12 +92,18 @@
         <label> branch:</label>
         <select class="form-control" formControlName="branch">
           <option>Please select</option>
+          <option *ngFor="let branch of branchList">
+            {{branch}}
+          </option>
         </select>
       </div>
       <div class="col-lg-6">
         <label> Sem:</label>
         <select class="form-control" formControlName="sem">
           <option>Please select</option>
+          <option *ngFor="let sem of semList">
+            {{sem}}
+          </option>
         </select>
       </div>
     </div>
