@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="card">
+      <div class="card-header">
+        <h6 style="text-align: center">Road Tax Data</h6>
+      </div>
+  
+  
+      <div class="card-body">
+        <table id="example" class="table1" style="width:100%">
+          <thead>
+            <tr>
+              <th>Vehicle No.</th>
+              <th>Chalan No.</th>
+              <th>Name of RTO</th>
+              <th>Expiry Date</th>
+              <th>Renewal Date</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of vehicleLog ">
+  
+  
+              <td><input type="number" id="row-1-vnumber" name="row-1-vnumber" placeholder="number"
+                  value="{{log.rtaxChalanNbr}}" readonly></td>
+              <td><input type="number" id="row-1-pnumber" name="row-1-pnumber" placeholder="number"
+                  value="{{log.rtaxNameRTO}}" readonly></td>
+              
+              <td><input type="date" id="row-1-expdate" name="row-1-expdate" value="{{log.rtaxExpDate}}" readonly></td>
+              <td><input type="date" id="row-1-rendate" name="row-1-rendate" value="{{log.rtaxRenDate}}" readonly></td>
+              <td><input type="number" id="row-1-amt" name="row-1-amt" value="{{log.rtaxBill}}" readonly></td>
+            </tr>
+          </tbody>
+  
+        </table>
+        
+  
+  
+  
+  
+  
+      </div>
+    </div>
+  
+  </div>

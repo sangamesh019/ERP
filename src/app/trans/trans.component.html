@@ -1,0 +1,803 @@
+<div class="wrapper ">
+  <div class="sidebar" data-color="white" data-active-color="danger">
+    <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+    <div class="logo">
+      <a class="simple-text logo-mini">
+        <div class="logo-image-small">
+          <img src="../assets/img/logo-small.png">
+        </div>
+      </a>
+      <a class="simple-text logo-normal">
+        My Profile
+        <!-- <div class="logo-image-big">
+            <img src="../assets/img/logo-big.png">
+          </div> -->
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li>
+          <a (click)="lookDashboard()">
+            <i class="nc-icon nc-bank"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+
+        <li class="active">
+          <a (click)="vehicle()">
+            <i class="nc-icon nc-bus-front-12"></i>
+            <p>Vehicle</p>
+          </a>
+        </li>
+        <li>
+          <a href="./driver.html">
+            <i class="nc-icon nc-badge"></i>
+            <p>Driver</p>
+          </a>
+        </li>
+        <li>
+          <a href="./dutyalert.html">
+            <i class="nc-icon nc-zoom-split"></i>
+            <p>Duty Alert</p>
+          </a>
+        </li>
+
+        <li>
+          <a (click)="dailylogButton()">
+            <i class="nc-icon nc-single-copy-04"></i>
+            <p>Daily Log</p>
+          </a>
+        </li>
+        <li>
+          <a href="./report.html">
+            <i class="nc-icon nc-paper"></i>
+            <p>Report</p>
+          </a>
+        </li>
+        <li>
+          <a href="./student.html">
+            <i class="nc-icon nc-satisfied"></i>
+            <p>Student</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <a class="navbar-brand" href="#pablo">Transport Section Dashboard</a>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div class="row" *ngIf="vDetails">
+
+        <div class="col-md-6">
+          <!-- The form -->
+          <!-- <form  action="./dashboard.html"> -->
+          <input type="text" placeholder="Search Vehicle.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+          <!-- </form> -->
+        </div>
+        <div class="col-md-6">
+          <!-- <form  action="./addvehicle.html" > -->
+          <button type="submit" class="btn btn-primary btn-lg" (click)="addVehicleButton()">Add Vehicle</button>
+          <!-- </form> -->
+
+        </div>
+      </div>
+      <br>
+      <!--options-->
+      <div *ngIf="vDetails" class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <a (click)="showFitnessData()"class="button">FITNESS</a>
+
+              <a (click)="showRoadtaxData()"class="button">ROADTAX</a>
+
+              <a (click)="showInsurenceData()" class="button">INSURANCE</a>
+
+              <a href="./permit.html" class="button">PERMIT</a>
+
+              <a href="./spareparts.html" class="button">SPARE PARTS</a>
+
+              <a href="./labour.html" class="button">LABOUR</a>
+
+              <a href="./fuel.html" class="button">FUEL</a>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--options ends-->
+      <!--table starts-->
+      <br>
+      <div *ngIf="showHome" class="row">
+        <div class="col-md-12">
+          <div class="card ">
+            <div class="card-body ">
+              <table class="paleBlueRows">
+                <thead>
+                  <tr>
+                    <th>Sl No.</th>
+                    <th>Vehicle No.</th>
+                    <th>Route</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>123456</td>
+                    <td>Chickballapur</td>
+
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>123456</td>
+                    <td>Chickballapur</td>
+
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>123456</td>
+                    <td>Chickballapur</td>
+
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!--table ends-->
+      </div>
+      <div *ngIf="showInsLogData">
+        <app-insucrance></app-insucrance>
+      </div>
+      <div *ngIf="showRoadtax">
+      <app-roadtax></app-roadtax>
+      </div>
+      <div *ngIf="showFitness">
+        <app-fitness></app-fitness>
+      </div>
+
+      <div *ngIf="addVehicle" class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div id="first">
+                <form [formGroup]="newVehicle">
+                  <h2>Add Vehicle</h2>
+                  <label class="one">
+                    <span>Make of Chassis :</span>
+                    <div id="second">
+                      <input name="nchassis" type="text" formControlName="mChassis">
+                      <div *ngIf="!mChassis.valid && (mChassis.dirty || mChassis.touched)" class="alert alert-danger">
+                        <div *ngIf="mChassis.errors.required">
+                          <div>Make of Chassis required</div>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Maker's type of Vehicle :</span>
+                    <div id="second">
+                      <input name="vtype" type="text" formControlName="mType">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Wheel Base :</span>
+                    <div id="second">
+                      <input name="wbase" type="text" formControlName="wheelBase">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Registration number :</span>
+                    <div id="second">
+                      <input name="rnumber" type="number" formControlName="regNbr">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>S. T. Unit Number :</span>
+                    <div id="second">
+                      <input name="stunumber" type="number" formControlName="stUnitNbr">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Chassis Number :</span>
+                    <div id="second">
+                      <input name="cnumber" type="number" formControlName="chassisNbr">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Engine Number :</span>
+                    <div id="second">
+                      <input name="enumber" type="number" formControlName="engNbr">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Engine Make and type :</span>
+                    <div id="second">
+                      <input name="emaketype" type="text" formControlName="engMType">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Types of body :</span>
+                    <div id="second">
+                      <input name="tbody" type="text" formControlName="typeBody">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Fuel tank capacity(lit) :</span>
+                    <div id="second">
+                      <input name="ftank" type="number" formControlName="fuelTankCap">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Unloaden weight :</span>
+                    <div id="second">
+                      <input name="unweight" type="number" formControlName="unloadCap">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Registered Loaden Weight :</span>
+                    <div id="second">
+                      <input name="lweight" type="number" formControlName="regloadCap">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Chassis weight :</span>
+                    <div id="second">
+                      <input name="cweight" type="number" formControlName="chassisWeight">
+                    </div>
+                  </label>
+                  <label class="one">
+                    <span>Size of tyre </span>
+                  </label>
+                  <hr>
+                  <label class="two">
+                    <span> Front :</span>
+                    <div>
+                      <input name="tfsize" type="text" formControlName="sizeFrontTire">
+                    </div>
+                  </label>
+                  <label class="two">
+                    <span> Rear :</span>
+                    <div>
+                      <input name="trsize" type="text" formControlName="sizeRearTire">
+                    </div>
+                  </label>
+
+                  <label class="one">
+                    <span>Date when commissioned :</span>
+                    <div id="second">
+                      <input name="datecom" type="date" formControlName="commDate">
+                    </div>
+                  </label>
+                  <button class="submit" name="dsubmit" (click)="registerNewVehi()">ADD</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="dashboard" class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big text-center icon-warning">
+                    <i class="nc-icon nc-bus-front-12 text-warning"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers">
+                    <p class="card-category">Total Number of</p>
+                    <p class="card-category"> Buses </p>
+                    <p class="card-title">{{totalBusCount}}
+                      <p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer ">
+              <hr>
+              <div class="stats">
+                <i class="fa fa-refresh">Update Now</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big text-center icon-warning">
+                    <i class="nc-icon nc-badge text-success"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers">
+                    <p class="card-category">Total Number of Bus Drivers</p>
+                    <p class="card-title">32
+                      <p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer ">
+              <hr>
+              <div class="stats">
+                <i class="fa fa-refresh">Update Now</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big text-center icon-warning">
+                    <i class="nc-icon nc-vector text-danger"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers">
+                    <p class="card-category">Students using Bus Service</p>
+                    <p class="card-title">150
+                      <p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer ">
+              <hr>
+              <div class="stats">
+                <i class="fa fa-refresh">Update Now</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="dailylog" class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 style="text-align: center">Log Form</h5>
+            </div>
+
+            <div class="card-body">
+              <form [formGroup]="vehicleLogGroup">
+                <div class="row">
+
+                  <div class="col-md-1 pr-1">
+                    <div class="form-group">
+                      Log Search :
+                    </div>
+                  </div>
+                  <div class="col-md-4 px-1">
+                    <div>
+                      <input type="date" name="datesearch">
+                    </div>
+                  </div>
+                  <div class="col-md-4 px-1">
+                    <div class="form-group">
+                      <input type="number" placeholder="Enter Vehicle Number.." name="search">
+                    </div>
+                  </div>
+                  <div class="col-md-3 pl-1">
+                    <div class="form-group">
+                      <button class="btn btn-simple" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <!--second part of form-->
+                <div class="row">
+                  <div class="col-md-4">
+                    <span>Vehicle Number:</span>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="number" value="1" formControlName="vehicleNbr">
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <span>Driver Name:</span>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" placeholder="Company" value="Ramesh" formControlName="driverName">
+                    </div>
+                  </div>
+
+                </div>
+                <!--second part of form ends-->
+                <!--Third part of form starts-->
+                <hr>
+                <h6 style="text-align: center;">Report regarding the vehicle ride</h6>
+                <br>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-3">
+                    Pickup Point:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <input class="col-md-12" type="text" placeholder="Pickup Location" formControlName="pickPoint">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-3">
+                    KMS:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <input class="col-md-12" type="text" placeholder="KMS" formControlName="kms">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-2">
+                    Destination:
+                  </span>
+                  <div>
+                    <div style=" margin-right: -51pt;">
+                      <input class="col-md-8" type="text" placeholder="Final location"
+                        formControlName="destinationPoint">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-2">
+                    Initial Reading:
+                  </span>
+                  <div>
+                    <div style=" margin-right: -51pt;">
+                      <input class="col-md-8" type="number" placeholder="KM" formControlName="initReading">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-2">
+                    Final Reading:
+                  </span>
+                  <div>
+                    <div style=" margin-right: -51pt;">
+                      <input class="col-md-8" type="number" placeholder="KM" formControlName="finalReading">
+                    </div>
+                  </div>
+                </div>
+
+                <!--Third part of form ends-->
+                <!--Fourth Part of form starts-->
+                <hr>
+                <h6 style="text-align: center;">Report of repairs</h6>
+                <br>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-6">
+                    Repairs:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <select formControlName="repairs" (change)="selectedRepare()">
+                        <!-- <option id="">Engine Repair</option>
+                        <option>Chassis Repair</option>
+                        <option>Body Repair</option> -->
+                        <option id="fuel" value="fuel">Fuel refill</option>
+                        <option id="roadTax" value="roadTax">Road Tax</option>
+                        <option id="insurance" value="insurance">insurance</option>
+                        <option id="fitness" value="fitness">Fitness</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div *ngIf="insuranceScreen">
+                    <div style="text-align: center" class="col-md-6">
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Policy Number:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="insPolNbr" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Name of the Company:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="inNameOfComp" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Exp date:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="date" formControlName="insExpdate" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          ren Date:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="date" formControlName="insRenDate" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Billing Amount:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="text"class="textarea" formControlName="insBill" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <!-- Road Tax -->
+                <div id="roadTaxScreen" *ngIf="roadTaxScreen">
+                    <div style="text-align: center" class="col-md-6">
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Chalan Nbr:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="rtaxChalanNbr" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Name of RTO:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="rtaxNameRTO" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Exp date:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="date" formControlName="rtaxExpDate" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          ren Date:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="date" formControlName="rtaxRenDate" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Billing Amount:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="text"class="textarea" formControlName="rtaxBill" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Fitns Tax -->
+                <div id="fitness" *ngIf="fitnessScreen">
+                    <div style="text-align: center" class="col-md-6">
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Cert Number:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="fitCertnbr" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Name of RTO:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="fitnameRTO" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Exp date:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="date" formControlName="fitExpNbr" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          ren Date:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="date" formControlName="fitRenNbr" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Billing Amount:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="text"class="textarea" formControlName="fitBill" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Fitns Tax -->
+                <div id="fitness" *ngIf="fuelScreen">
+                    
+                        <div class="">
+                            <span style="text-align: center" class="col-md-6">
+                              Bill Number:
+                            </span>
+                            <div class="col-md-6">
+                              <input class=" textarea" formControlName="fuelBillNbr" />
+                            </div>
+                          </div>
+
+                        <div class="">
+                            <span style="text-align: center" class="col-md-6">
+                              HSD in litter:
+                            </span>
+                            <div class="col-md-6">
+                              <input class=" textarea" formControlName="fuelHSD" />
+                            </div>
+                          </div>
+
+                      <div class="">
+                            <span style="text-align: center" class="col-md-6">
+                              Filling date:
+                            </span>
+                            <div class="col-md-6">
+                              <input type="date" formControlName="fuelFilldate" />
+                            </div>
+                          </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Cert Number:
+                        </span>
+                        <div class="col-md-6">
+                          <input class=" textarea" formControlName="fuelCertNbr" />
+                        </div>
+                      </div>
+                      
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Progressive:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="text" formControlName="fuelPro" />
+                        </div>
+                      </div>
+                      <div class="">
+                        <span style="text-align: center" class="col-md-6">
+                          Billing Amount:
+                        </span>
+                        <div class="col-md-6">
+                          <input type="text"class="textarea" formControlName="fuelBill" />
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!--Fourth part of form ends-->
+                <!--fifth part of form stars-->
+                <hr>
+                <h6 style="text-align: center;">Faults</h6>
+                <br>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-6">
+                    Complaints (if any):
+                  </span>
+                  <div class="col-md-6">
+                    <textarea class=" textarea" formControlName="complain">Lorem ipsu blah blah blah...</textarea>
+                  </div>
+                </div>
+                <!--fifth part of form ends-->
+                <!--sixth part of form starts-->
+                <hr>
+                <h6 style="text-align: center;">Complete Information</h6><br>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-2">
+                    Date:
+                  </span>
+                  <div>
+                    <div style=" margin-right: -51pt;">
+                      <input class="col-md-8" type="date" formControlName="dateComplain">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-2">
+                    Amount:
+                  </span>
+                  <div>
+                    <div style=" margin-right: -51pt;">
+                      <input class="col-md-8" type="number" placeholder="in Rupees" formControlName="amount">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-2">
+                    Diesel:
+                  </span>
+                  <div>
+                    <div style=" margin-right: -51pt;">
+                      <input class="col-md-8" type="number" placeholder="in litres" formControlName="desiel">
+                    </div>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-3">
+                    Info where the fuel is filled:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <input class="col-md-12" type="text" placeholder="Location" formControlName="desielFilledLocInfo">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-3">
+                    Place where the fuel is filled:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <input class="col-md-12" type="text" placeholder="Location" formControlName="desielFilledLoc">
+                    </div>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <span style="text-align: center" class="col-md-3">
+                    Driver Signature:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <input class="col-md-12" type="text" placeholder="Location" formControlName="driSign">
+                    </div>
+                  </div>
+                  <span style="text-align: center" class="col-md-3">
+                    Incharge Signature:
+                  </span>
+                  <div>
+                    <div class="form-group">
+                      <input class="col-md-12" type="text" placeholder="Location" formControlName="inchargeSign">
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="update ml-auto mr-auto">
+                    <button type="submit" class="btn btn-primary btn-round" (click)="submitLog()">Save</button>
+                  </div>
+                </div>
+                <br>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
