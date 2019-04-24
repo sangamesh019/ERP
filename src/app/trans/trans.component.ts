@@ -311,6 +311,7 @@ export class TransComponent implements OnInit {
     this.showInsLogData = false;
     this.showRoadtax = false;
     this.showFitness= false;
+    this.showFuel = false;
   }
   addVehicleButton() {
     this.addVehicle = true;
@@ -321,6 +322,7 @@ export class TransComponent implements OnInit {
     this.showInsLogData = false;
     this.showRoadtax = false;
     this.showFitness= false;
+    this.showFuel = false;
   }
 
   lookDashboard() {
@@ -342,6 +344,7 @@ export class TransComponent implements OnInit {
     this.showInsLogData = false;
     this.showRoadtax = false;
     this.showFitness= false;
+    this.showFuel = false;
   }
   get mChassis() { return this.newVehicle.get('mChassis'); }
   // get password() { return this.profileForm.get('password'); }
@@ -354,6 +357,7 @@ export class TransComponent implements OnInit {
   selectedRepare() {
     this.showInsLogData = false;
     this.showFitness= false;
+    this.showFuel = false;
     let selectedVal = this.vehicleLogGroup.controls['repairs'].value;
     if (selectedVal === 'insurance') {
       this.insuranceScreen = true;
@@ -382,19 +386,30 @@ export class TransComponent implements OnInit {
   showInsLogData: boolean;
   showRoadtax: boolean;
   showFitness: boolean;
+  showFuel: boolean;
+
   showInsurenceData(){
   this.showInsLogData = true;
   this.showRoadtax = false;
   this.showFitness= false;
+  this.showFuel = false;
   }
   showRoadtaxData(){
     this.showInsLogData = false;
     this.showRoadtax = true;
     this.showFitness= false;
+    this.showFuel = false;
   }
   showFitnessData(){
     this.showInsLogData = false;
   this.showRoadtax = false;
   this.showFitness= true;
+  this.showFuel = false;
+  }
+  showFuelData(){
+    this.showInsLogData = false;
+  this.showRoadtax = false;
+  this.showFitness= false;
+    this.showFuel = true;
   }
 }

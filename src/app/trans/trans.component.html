@@ -115,14 +115,7 @@
 
               <a (click)="showInsurenceData()" class="button">INSURANCE</a>
 
-              <a href="./permit.html" class="button">PERMIT</a>
-
-              <a href="./spareparts.html" class="button">SPARE PARTS</a>
-
-              <a href="./labour.html" class="button">LABOUR</a>
-
-              <a href="./fuel.html" class="button">FUEL</a>
-
+              <a (click)="showFuelData()" class="button">FUEL</a>
 
             </div>
           </div>
@@ -180,6 +173,9 @@
       </div>
       <div *ngIf="showFitness">
         <app-fitness></app-fitness>
+      </div>
+      <div *ngIf="showFuel">
+        <app-fuel></app-fuel>
       </div>
 
       <div *ngIf="addVehicle" class="content">
