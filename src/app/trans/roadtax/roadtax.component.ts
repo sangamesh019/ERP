@@ -6,7 +6,8 @@ import { TransServiceService } from '../trans-service.service';
   templateUrl: './roadtax.component.html',
   styleUrls: ['./roadtax.component.css']
 })
-export class RoadtaxComponent implements OnInit {  constructor(public service: TransServiceService) { }
+export class RoadtaxComponent implements OnInit {  
+  constructor(public service: TransServiceService) { }
 
 vehicleLog: Array<string> = [];
 vehicleLogList: any;

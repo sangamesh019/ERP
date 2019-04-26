@@ -50,6 +50,12 @@
             <p>upload Result</p>
           </a>
         </li>
+        <li>
+            <a (click)="showEventScreen()">
+              <i class="nc-icon nc-badge"></i>
+              <p>upload event</p>
+            </a>
+          </li>
         <!-- <li>
           <a href="./dutyalert.html">
             <i class="nc-icon nc-zoom-split"></i>
@@ -238,7 +244,30 @@
             </div>
           </form>
         </div>
+<!--  start event-->
 
+        
+<div *ngIf="showEvent">
+    <h2>Upload Event</h2>
+    <form [formGroup]="eventUpload">
+
+        <div class="form-group">
+            <label> Event Title:</label>
+            <input type="text" class="form-control" style="width: 50% !important" formControlName="eventType" />
+          </div>
+          <div class="form-group">
+            <label> Event description:</label>
+            <textarea type="text" class="form-control" style="width: 50% !important; height: 30% !important" formControlName="eventDec" ></textarea>
+          </div>
+          <div class="form-group">
+            <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
+              (click)="uploadEvent()">
+              Upload Event
+            </button>
+          </div>
+      </form>
+  </div>
+<!-- end event -->
         <div *ngIf="showResult">
           <h2>Upload results</h2>
           <form [formGroup]="fresult">

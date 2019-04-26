@@ -16,18 +16,20 @@ export class FacultyComponent implements OnInit {
   fProfileForm: FormGroup;
   fSubject: FormGroup;
   fresult: FormGroup;
+  eventUpload: FormGroup;
   showResult: boolean;
+  showEvent: boolean;
   assignSubPage: boolean;
   studentInfo: any;
   constructor(private fb: FormBuilder, private service: FacultyFunService, public cdr: ChangeDetectorRef) { }
 
-  
+
   EEE: Array<any> = [
-    {'sub': 'EEE1'}, {"sub":'EEE2'}, {'sub':'EEE3'}, {'sub':'EEE4'}, {'sub':'EEE5'}];
-    EC: Array<any> = [
-      {'sub': 'EC1'}, {"sub:":'EC2'}, {'sub':'EC3'}, {'sub':'EC4'}, {'sub':'EC5'}];
-      IS: Array<any> = [
-        {'sub': 'IS1'}, {"sub:":'IS2'}, {'sub':'IS3'}, {'sub':'IS4'}, {'sub':'IS5'}];
+    { 'sub': 'EEE1' }, { "sub": 'EEE2' }, { 'sub': 'EEE3' }, { 'sub': 'EEE4' }, { 'sub': 'EEE5' }];
+  EC: Array<any> = [
+    { 'sub': 'EC1' }, { "sub:": 'EC2' }, { 'sub': 'EC3' }, { 'sub': 'EC4' }, { 'sub': 'EC5' }];
+  IS: Array<any> = [
+    { 'sub': 'IS1' }, { "sub:": 'IS2' }, { 'sub': 'IS3' }, { 'sub': 'IS4' }, { 'sub': 'IS5' }];
   subjectDropdown: any[];
 
   currentFileUpload: File;
@@ -93,6 +95,7 @@ export class FacultyComponent implements OnInit {
   }
   ngOnInit() {
     this.showResult = false;
+    this.showEvent = false;
     this.uploadNotesPage = false;
     this.assignSubjectPage = false;
     this.hodActivity = true;
@@ -100,7 +103,7 @@ export class FacultyComponent implements OnInit {
     let that = this;
     this.subjectDropdown = null;
     this.service.getFacEmail().subscribe(data => {
-      
+
       that.facInfo = data;
       this.getSubAssignedToMe();
       if (that.facInfo.designation === 'HOD') {
@@ -111,7 +114,7 @@ export class FacultyComponent implements OnInit {
       this.cdr.detectChanges();
     });
 
-    
+
 
     this.fProfileForm = this.fb.group({
       data: ['a', Validators.required],
@@ -128,7 +131,7 @@ export class FacultyComponent implements OnInit {
       section: ['a'],
       subject: ['', Validators.required]
     });
-    
+
     this.fresult = this.fb.group({
       internals: ['', Validators.required],
       subject: ['', Validators.required],
@@ -137,12 +140,16 @@ export class FacultyComponent implements OnInit {
       internMarks: ['', Validators.required],
       assignMarks: ['', [Validators.pattern('[0-9]+'), Validators.required]]
     });
+    this.eventUpload = this.fb.group({
+      eventType: ['', Validators.required],
+      eventDec: ['', Validators.required]
+    })
   }
 
-  getSubAssignedToMe(){
+  getSubAssignedToMe() {
     let that = this;
-    this.service.getSubjectAssignedToFaculty(that.facInfo.branch, that.facInfo.fName).subscribe(subjects =>{
-      if(subjects!= null){
+    this.service.getSubjectAssignedToFaculty(that.facInfo.branch, that.facInfo.fName).subscribe(subjects => {
+      if (subjects != null) {
         that.subjectList = subjects;
       } else {
         alert('No subject assigned')
@@ -173,7 +180,8 @@ export class FacultyComponent implements OnInit {
 
   assignSubject() {
 
-    this.showResult = false; 
+    this.showResult = false;
+    this.showEvent = false;
     this.uploadNotesPage = false;
     this.assignSubjectPage = true;
     // this.assignSubPage = true;
@@ -184,68 +192,98 @@ export class FacultyComponent implements OnInit {
       }
     });
     // this.hodActivity = false;
-    
+
   }
 
   assignNotes() {
     this.hodActivity = true;
     this.uploadNotesPage = true;
     this.assignSubjectPage = false;
-    this.showResult = false; 
+    this.showResult = false;
+    this.showEvent = false;
     this.assignSubPage = false;
   }
-  uploadResult(){
+  uploadResult() {
     let that = this;
     this.service.getStudentByBranch(this.facInfo.branch).subscribe(data => {
       that.studentInfo = data;
     });
-    if(that.facInfo.branch === 'EEE'){
+    if (that.facInfo.branch === 'EEE') {
       that.subjectDropdown = this.EEE;
     } else
-    if(that.facInfo.branch === 'EC'){
-      this.subjectDropdown = this.EC;
-    } else
-    if(that.facInfo.branch === 'IS'){
-      this.subjectDropdown = this.IS;
-    } else {
-      this.subjectDropdown = this.IS;
-    }
-    this.showResult = true; 
+      if (that.facInfo.branch === 'EC') {
+        this.subjectDropdown = this.EC;
+      } else
+        if (that.facInfo.branch === 'IS') {
+          this.subjectDropdown = this.IS;
+        } else {
+          this.subjectDropdown = this.IS;
+        }
+    this.showResult = true;
+    this.showEvent = false;
     this.uploadNotesPage = false;
     this.assignSubjectPage = false;
     this.assignSubPage = false;
   }
 
-  uploadResultOfStudents(){
-    
-    if(this.fresult.valid){
-      if(this.fresult.controls['internals'].value !== 'pleaseSelect'){
-    let splitValue = this.fresult.controls['Student'].value;
-    let semUsn = splitValue.split('-');
-    this.fresult.controls['assignMarks'].value;
-
-    let result = {
-      'internals': this.fresult.controls['internals'].value,
-      'sem': semUsn[1],
-      'sub': this.fresult.controls['subject'].value,
-      'usn': semUsn[0],
-      'internalMark':this.fresult.controls['internMarks'].value,
-      'assignMarks': this.fresult.controls['assignMarks'].value
+  showEventScreen() {
+    this.showResult = false;
+    this.showEvent = true;
+    this.uploadNotesPage = false;
+    this.assignSubjectPage = false;
+    this.assignSubPage = false;
+  }
+  uploadEvent() {
+    if (this.eventUpload.valid) {
+      let event = {
+        'eventType': this.eventUpload.controls['eventType'].value,
+        'eventDetails': this.eventUpload.controls['eventDec'].value,
+        'allowed': false
+      }
+      this.service.uploadEvent(event).subscribe(re => {
+        if (re != null || re != undefined) {
+          alert('Event uploaded successfully');
+          this.eventUpload.controls['eventType'].setValue('');
+          this.eventUpload.controls['eventDec'].setValue('');
+        } else {
+          alert('failed to upload event');
+        }
+      });
+    } else {
+      alert('add all values');
     }
+  }
 
-    this.service.uploadResults(result).subscribe(resp =>{
-if(resp !== null || resp != undefined){
-alert('results uploaded');
-} else {
-  alert('failed to upload results');
-}
-    });
-  } else {
-    alert('please enter all values');
-  }
-  } else {
-    alert('please enter all values');
-  }
+  uploadResultOfStudents() {
+
+    if (this.fresult.valid) {
+      if (this.fresult.controls['internals'].value !== 'pleaseSelect') {
+        let splitValue = this.fresult.controls['Student'].value;
+        let semUsn = splitValue.split('-');
+        this.fresult.controls['assignMarks'].value;
+
+        let result = {
+          'internals': this.fresult.controls['internals'].value,
+          'sem': semUsn[1],
+          'sub': this.fresult.controls['subject'].value,
+          'usn': semUsn[0],
+          'internalMark': this.fresult.controls['internMarks'].value,
+          'assignMarks': this.fresult.controls['assignMarks'].value
+        }
+
+        this.service.uploadResults(result).subscribe(resp => {
+          if (resp !== null || resp != undefined) {
+            alert('results uploaded');
+          } else {
+            alert('failed to upload results');
+          }
+        });
+      } else {
+        alert('please enter all values');
+      }
+    } else {
+      alert('please enter all values');
+    }
     // uploadResults();
   }
 }

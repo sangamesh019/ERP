@@ -39,6 +39,10 @@ export class FacultyFunService {
     return this.http.post("http://localhost:8080/college/editFaculty", faculty);
   }
 
+  uploadEvent(event): Observable<any> {
+    return this.http.post("http://localhost:8080/college/uploadEvents", event);
+  }
+
   signUpFile(photo: File, email: string): Observable<any> {
     let fomrData = new FormData();
     fomrData.append('file', photo);
@@ -50,6 +54,9 @@ export class FacultyFunService {
   getFacEmail(): Observable<any> {
     let email = localStorage.getItem('id');
     return this.http.get("http://localhost:8080/college/faculty/" + email);
+  }
+  geAllEvents(): Observable<any> {
+    return this.http.get("http://localhost:8080/college/getAllEvents/");
   }
 
   getFacList(branch): Observable<any> {
