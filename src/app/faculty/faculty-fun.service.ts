@@ -63,4 +63,12 @@ export class FacultyFunService {
   getSubjectAssignedToFaculty(branch, email): Observable<any> {
     return this.http.get("http://localhost:8080/college/getSubjectAssigned/" + branch + "/" + email);
   }
+
+  getStudentByBranch(branch): Observable<any> {
+    return this.http.get("http://localhost:8080/college/studentBranch/" + branch);
+  }
+
+  uploadResults(result) {
+    return this.http.post("http://localhost:8080/college/uploadResults", result);
+  }
 }

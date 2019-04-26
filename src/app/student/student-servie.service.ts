@@ -41,6 +41,10 @@ export class StudentServieService {
     return this.http.get("http://localhost:8080/college/listAllAssignments/"+student.branch+"/"+student.sem, this.httpOptions);
   }
 
+  getMyresult(usn): Observable<any> {
+    return this.http.get("http://localhost:8080/college/studentResults/"+usn);
+  }
+
   getStuList(): Observable<any> { 
     return this.http.get("http://localhost:8080/college/students", this.httpOptions);
   }

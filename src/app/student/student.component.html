@@ -28,7 +28,7 @@
           </a>
         </li>
         <li>
-          <a (click)="listAllStudents()">
+          <a (click)="getMyResult()">
             <i class="nc-icon nc-badge"></i>
             <p> View results</p>
           </a>
@@ -53,14 +53,22 @@
   </div> -->
     <div class="content">
 
+      <h5>Results</h5>
       <div class="col-lg-8">
         <table class="table">
-          <tbody *ngFor="let stu of stuList; let i = index">
+          <thead>
+            <th>Internals</th>
+            <th>Subject</th>
+            <th>Internal Mark</th>
+            <th>Assignment Mark</th>
+          </thead>
+          <tbody *ngFor="let res of result; let i = index">
             <tr>
-              <td>{{stu.fName}}</td>
-              <td>{{stu.mNumber}}</td>
-              <td><img src="data:image/jpeg;base64,{{stu.photo}}" style="width: 50px; height: 50px" /></td>
-              <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
+              <td>{{res.internals}}</td>
+              <td>{{res.sub}}</td>
+              <td>{{res.internalMark}}</td>
+              <td>{{res.assignMarks}}</td>
+              
             </tr>
           </tbody>
         </table>
@@ -68,7 +76,7 @@
       <div *ngIf="assignmentShow">
         <div class="col-lg-8">
           <!-- Page Content -->
-          <div (click)="getAssignment()"> getAssignment </div>
+          <button (click)="getAssignment()"> getAssignment </button>
           <div id="content">
             <h2>List of Contents</h2>
             <p></p>

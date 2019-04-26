@@ -9,7 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class StudentComponent implements OnInit, AfterViewInit {
 
- public studentInfo: object;
+  public studentInfo: any;
   public assignmentList: [];
   public stuList: [];
   public profileForm: FormGroup;
@@ -47,6 +47,22 @@ export class StudentComponent implements OnInit, AfterViewInit {
   listAllStudents(){
     this.service.getStuList().subscribe(stuList => {
       this.stuList = stuList;
+    });
+  }
+
+  result: any;
+  showResult: boolean;
+
+  getMyResult(){
+    // this.showResult = !this.showResult;
+    let that = this;
+    this.service.getMyresult(this.studentInfo.usn).subscribe(result => {
+      if(result != null || result != undefined){
+        that.result = result;
+        // alert(that.result.sem);
+      } else {
+        alert('No results found');
+      }
     });
   }
 }

@@ -246,24 +246,29 @@
               <label> select internals:</label>
               <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
                 formControlName="internals">
-                <option>Please select</option>
+                <option value="pleaseSelect">Please select</option>
+                <option value="First Internal">1st Internal</option>
+                <option value="Second Internal">2nd Internal</option>
+                <option value="Third Internal">3rd Internal</option>
               </select>
+
             </div>
             <div class="form-group">
               <label> Subect:</label>
               <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="subject">
-                <option>Please select</option>
+                <option *ngFor="let sub of subjectDropdown; let in =index">{{sub.sub}}</option>
               </select>
             </div>
             <div class="form-group">
               <label> Student:</label>
               <select type="text" class="form-control" style="width: 50% !important" id="section"
                 formControlName="Student">
-                <option id="a" value="a" selected="selected">
-                  "A" section
+                <option *ngFor="let stu of studentInfo" value="{{stu.usn}}-{{stu.sem}}">
+                  {{stu.fName}} of sem {{stu.sem}}
                 </option>
               </select>
             </div>
+
             <div class="form-group">
               <label> Internal Marks:</label>
               <input type="text" class="form-control" style="width: 50% !important" formControlName="internMarks" />
@@ -274,7 +279,7 @@
             </div>
             <div class="form-group">
               <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
-                (click)="assignSubjectFaculty()">
+                (click)="uploadResultOfStudents()">
                 Upload Results
               </button>
             </div>
