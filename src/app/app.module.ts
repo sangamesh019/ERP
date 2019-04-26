@@ -16,6 +16,11 @@ import { StudentServieService } from './student/student-servie.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CanActiveStudentService } from './can-active-student.service';
+import { TransComponent } from './trans/trans.component';
+import { InsucranceComponent } from './trans/insucrance/insucrance.component';
+import { RoadtaxComponent } from './trans/roadtax/roadtax.component';
+import { FuelComponent } from './trans/fuel/fuel.component';
+import { FitnessComponent } from './trans/fitness/fitness.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { CanActiveStudentService } from './can-active-student.service';
     HodComponentComponent,
     HomeComponent,
     StudentSignupComponent,
-    FacultySignupComponent
+    FacultySignupComponent,
+    TransComponent,
+    InsucranceComponent,
+    RoadtaxComponent,
+    FuelComponent,
+    FitnessComponent
   ],
   imports: [
     BrowserModule,

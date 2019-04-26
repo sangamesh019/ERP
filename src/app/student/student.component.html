@@ -1,91 +1,102 @@
-<!-- <div class="container"> -->
-<div class="wrapper">
-  <div class="col-lg-4">
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <div *ngIf="studentInfo !== null">
-          <h3>{{studentInfo.fName}}</h3>
+<div class="wrapper ">
+  <div class="sidebar" data-color="white" data-active-color="danger">
 
-          <img src="data:image/jpeg;base64,{{studentInfo.photo}}" style="width: 100%; height: 100%"/>
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <div class="card card-user">
+          <div class="image">
+            <img src="../assets/img/damir-bosnjak.jpg" alt="...">
+          </div>
+          <div class="card-body" style="min-height: 150px !important">
+            <div class="author">
+              <a href="">
+                <img class="avatar border-gray" src="data:image/jpeg;base64,{{studentInfo.photo}}" alt="...">
+                <h2 class="title">{{ studentInfo.fName }}</h2>
+              </a>
+              <h5 class="title" routerLink="/studentSignup">Edit profile</h5>
+            </div>
+          </div>
+
         </div>
-        <ul class="list-unstyled components">
-          <li>
-              <a routerLink="/studentSignup" >Edit profile</a>
-          </li>
-        </ul>
       </div>
 
-      <ul class="list-unstyled components">
-        <p>What you can do.</p>
-        <li class="active">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Notes</a>
-          <ul class="collapse list-unstyled" id="homeSubmenu">
-            <li>
-              <a href="#">Subject 1</a>
-            </li>
-            <li>
-              <a href="#">Subject 2</a>
-            </li>
-            <li>
-              <a href="#">Subject 3</a>
-            </li>
-          </ul>
+      <ul class="nav">
+        <li>
+          <a (click)="showAssignment()">
+            <i class="nc-icon nc-bank"></i>
+            <p>Assignments</p>
+          </a>
         </li>
-        <li (click)="listAllStudents()">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> View results</a>
-        </li>
-        <li (click)="showAssignment()">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Assignments</a>
+        <li>
+          <a (click)="listAllStudents()">
+            <i class="nc-icon nc-badge"></i>
+            <p> View results</p>
+          </a>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <a class="navbar-brand" href="#pablo">Stundents Home Page</a>
+        </div>
+
+      </div>
     </nav>
-  </div>
+    <!-- End Navbar -->
+    <!-- <div class="panel-header panel-header-sm">
+  
+  
+  </div> -->
+    <div class="content">
 
-  <div class="col-lg-8">
-    <table class="table">
-      <tbody *ngFor="let stu of stuList; let i = index">
-        <tr>
-          <td>{{stu.fName}}</td>
-          <td>{{stu.mNumber}}</td>
-          <td><img src="data:image/jpeg;base64,{{stu.photo}}" style="width: 50px; height: 50px" /></td>
-          <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div *ngIf="assignmentShow">
-    <div class="col-lg-8">
-      <!-- Page Content -->
-      <div (click)="getAssignment()"> getAssignment </div>
-      <div id="content">
-        <h2>List of Contents</h2>
-        <p></p>
+      <div class="col-lg-8">
         <table class="table">
-          <thead>
+          <tbody *ngFor="let stu of stuList; let i = index">
             <tr>
-              <th>Subect </th>
-              <th>File name</th>
-              <th>download here</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let assignments of assignmentList; let i = index">
-            <tr>
-              <td>{{assignments.subject}}</td>
-              <td>{{assignments.fileName}}</td>
-              <!-- <td><img src="data:image/jpeg;base64,{{assignments.data}}" style="width: 50px; height: 50px" /></td> -->
-              <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}">
-                  <div>Download File</div>
-                </a></td>
+              <td>{{stu.fName}}</td>
+              <td>{{stu.mNumber}}</td>
+              <td><img src="data:image/jpeg;base64,{{stu.photo}}" style="width: 50px; height: 50px" /></td>
+              <!-- <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}" ><div >Download File</div></a></td> -->
             </tr>
           </tbody>
         </table>
+      </div>
+      <div *ngIf="assignmentShow">
+        <div class="col-lg-8">
+          <!-- Page Content -->
+          <div (click)="getAssignment()"> getAssignment </div>
+          <div id="content">
+            <h2>List of Contents</h2>
+            <p></p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subect </th>
+                  <th>File name</th>
+                  <th>download here</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let assignments of assignmentList; let i = index">
+                <tr>
+                  <td>{{assignments.subject}}</td>
+                  <td>{{assignments.fileName}}</td>
+                  <!-- <td><img src="data:image/jpeg;base64,{{assignments.data}}" style="width: 50px; height: 50px" /></td> -->
+                  <td><a href="http://localhost:8080/college/downloadAssignment/{{assignments.fileName}}">
+                      <div>Download File</div>
+                    </a></td>
+                </tr>
+              </tbody>
+            </table>
 
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="loader">
-<img src="/assets/gif.gif" style="width: 10%">
-</div>
-<!-- </div> -->
+  <div *ngIf="loader">
+    <img src="/assets/gif.gif" style="width: 10%">
+  </div>

@@ -1,197 +1,303 @@
-<!-- <div class="container"> -->
-<div class="wrapper">
-  <div class="col-lg-4">
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <h3>Home page faculty {{ facInfo.fName }}</h3>
-        <img src="data:image/jpeg;base64,{{ facInfo.photo }}" style="width: 100%; height: 100%" />
-        <ul class="list-unstyled components">
-          <li>
-            <a routerLink="/facultySignup">Edit profile</a>
-          </li>
-        </ul>
+<div class="wrapper ">
+  <div class="sidebar" data-color="white" data-active-color="danger">
+    <!--
+      Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+  -->
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <div class="card card-user">
+          <div class="image">
+            <img src="../assets/img/damir-bosnjak.jpg" alt="...">
+          </div>
+          <div class="card-body" style="min-height: 150px !important">
+            <div class="author">
+              <a href="">
+                <img class="avatar border-gray" src="data:image/jpeg;base64,{{ facInfo.photo }}" alt="...">
+                <h2 class="title">{{ facInfo.fName }}</h2>
+              </a>
+              <a routerLink="/facultyEdit">
+                <h5 class="title">Edit profile</h5>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
-      <ul class="list-unstyled components">
-        <li (click)="assignNotes()">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">upload Notes</a>
+      <ul class="nav">
+        <li>
+          <a (click)="assignNotes()">
+            <i class="nc-icon nc-bank"></i>
+            <p>upload Notes</p>
+          </a>
         </li>
-        <li (click)="uploadResult()">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">upload Result</a>
+        <!-- <li class="active">
+          <a href="./user.html">
+            <i class="nc-icon nc-single-02"></i>
+            <p>User Profile</p>
+          </a>
+        </li> -->
+        <!-- <li>
+          <a href="./vehicle.html">
+            <i class="nc-icon nc-bus-front-12"></i>
+            <p>Vehicle</p>
+          </a>
+        </li> -->
+        <li>
+          <a (click)="uploadResult()">
+            <i class="nc-icon nc-badge"></i>
+            <p>upload Result</p>
+          </a>
         </li>
-        <li *ngIf="!hod" (click)="assignSubject()">
-          <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Assign subect to faculty</a>
+        <!-- <li>
+          <a href="./dutyalert.html">
+            <i class="nc-icon nc-zoom-split"></i>
+            <p>Duty Alert</p>
+          </a>
+        </li> -->
+
+        <!-- <li>
+          <a href="./tables.html">
+            <i class="nc-icon nc-single-copy-04"></i>
+            <p>Daily Log</p>
+          </a>
+        </li>
+        <li>
+          <a href="./report.html">
+            <i class="nc-icon nc-paper"></i>
+            <p>Report</p>
+          </a>
+        </li> -->
+        <li>
+          <a *ngIf="!hod" (click)="assignSubject()">
+            <i class="nc-icon nc-satisfied"></i>
+            <p>Assign subect to faculty</p>
+          </a>
         </li>
       </ul>
-    </nav>
+    </div>
   </div>
-  <div class="col-lg-6">
-    <h1>Faculty activity</h1>
-    <div *ngIf="hodActivity">
-      <h2>Upload notes</h2>
-      <form [formGroup]="fProfileForm">
-        <div class="form-group">
-          <label> Upload details:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="data" formControlName="data">
-            <option id="b">
-              Notes
-            </option>
-            <option id="c">
-              Assignments
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="branch"> branch:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="branch" formControlName="branch">
-            <option id="EEE" selected="selected">
-              EEE
-            </option>
-            <option id="EC">
-              EC
-            </option>
-          </select>
-
-          <label> Sem:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="sem">
-            <option *ngFor="let sem of Sems">
-              {{ sem }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label> section:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="section" formControlName="section">
-            <option id="a" value="a" selected="selected">
-              "A" section
-            </option>
-            <option id="b">
-              "B" section
-            </option>
-            <option id="c">
-              "C" section
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label> Subject Name:</label>
-          <input type="text" class="form-control" style="width: 50% !important" formControlName="subject" />
-        </div>
-        <div class="form-group">
-          <label> Notes Name:</label>
-          <input type="file" class="form-control" style="width: 50% !important" formControlName="file"
-            (change)="selectFile($event)" />
-        </div>
-        <div class="form-group">
-          <button type="text" class="form-control" id="assignSub" (click)="uploadNotes()">
-            upload
-          </button>
-        </div>
-      </form>
-    </div>
-    <div *ngIf="!hodActivity">
-      <h2>Assign faculty</h2>
-      <form [formGroup]="fSubject">
-        <div class="form-group">
-          <label> select faculty:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
-            formControlName="facEmail">
-            <option>Please select</option>
-            <option *ngFor="let fac of facultyList">
-              {{ fac.fName }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label> Sem:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="sem">
-            <option *ngFor="let sem of Sems">
-              {{ sem }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label> section:</label>
-          <select type="text" class="form-control" style="width: 50% !important" id="section" formControlName="section">
-            <option id="a" value="a" selected="selected">
-              "A" section
-            </option>
-            <option id="b">
-              "B" section
-            </option>
-            <option id="c">
-              "C" section
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label> Subject Name:</label>
-          <input type="text" class="form-control" style="width: 50% !important" formControlName="subject" />
-        </div>
-        <div class="form-group">
-          <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
-            (click)="assignSubjectFaculty()">
-            Assign Subject
-          </button>
-        </div>
-      </form>
-    </div>
-    <div>
-      <div *ngIf="showResult">
-        <h2>Upload results</h2>
-        <form [formGroup]="fresult">
-          <div class="form-group">
-            <label> select internals:</label>
-            <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
-              formControlName="internals">
-              <option>Please select</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label> Subect:</label>
-            <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="subject">
-              <option>Please select</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label> Student:</label>
-            <select type="text" class="form-control" style="width: 50% !important" id="section"
-              formControlName="Student">
-              <option id="a" value="a" selected="selected">
-                "A" section
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label> Internal Marks:</label>
-            <input type="text" class="form-control" style="width: 50% !important" formControlName="internMarks" />
-          </div>
-          <div class="form-group">
-            <label> Assignment Marks:</label>
-            <input type="text" class="form-control" style="width: 50% !important" formControlName="assignMarks" />
-          </div>
-          <div class="form-group">
-            <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
-              (click)="assignSubjectFaculty()">
-              Assign Subject
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
             </button>
           </div>
-        </form>
+          <a class="navbar-brand" href="#pablo">Faculty Home Page</a>
+        </div>
+        
       </div>
+    </nav>
+    <div class="content">
+      <div class="row">
+        <!-- <div class="col-md-4">
+          <div class="card card-user">
+            <div class="image">
+              <img src="../assets/img/damir-bosnjak.jpg" alt="...">
+            </div>
+            <div class="card-body">
+              <div class="author">
+                <a href="#">
+                  <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+                  <h5 class="title">Diptangsu</h5>
+                </a>
+                <p class="description">
+                  @dip
+                </p>
+              </div>
+              <p class="description text-center">
+                "I like the way you work it
+                <br> No diggity
+                <br> I wanna bag it up"
+              </p>
+            </div>
+
+          </div>
+          
+        </div> -->
+        <div class="col-md-8">
+          <h1>Faculty activity</h1>
+
+
+          <div *ngIf="uploadNotesPage">
+            <h2>Upload notes</h2>
+            <form [formGroup]="fProfileForm">
+              <div class="form-group">
+                <label> Upload details:</label>
+                <select type="text" class="form-control" style="width: 50% !important" id="data" formControlName="data">
+                  <option id="b">
+                    Notes
+                  </option>
+                  <option id="c">
+                    Assignments
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="branch"> branch:</label>
+                <select type="text" class="form-control" style="width: 50% !important" id="branch"
+                  formControlName="branch">
+                  <option id="EEE" selected="selected">
+                    EEE
+                  </option>
+                  <option id="EC">
+                    EC
+                  </option>
+                </select>
+
+                <label> Sem:</label>
+                <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="sem">
+                  <option *ngFor="let sem of Sems">
+                    {{ sem }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label> section:</label>
+                <select type="text" class="form-control" style="width: 50% !important" id="section"
+                  formControlName="section">
+                  <option id="a" value="a" selected="selected">
+                    "A" section
+                  </option>
+                  <option id="b">
+                    "B" section
+                  </option>
+                  <option id="c">
+                    "C" section
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label> Subject Name:</label>
+                <input type="text" class="form-control" style="width: 50% !important" formControlName="subject" />
+              </div>
+              <div class="form-group">
+                <label> Notes Name:</label>
+                <input type="file" class="form-control" style="width: 50% !important" formControlName="file"
+                  (change)="selectFile($event)" />
+              </div>
+              <div class="form-group">
+                <button type="text" class="form-control" id="assignSub" (click)="uploadNotes()">
+                  upload
+                </button>
+              </div>
+            </form>
+          </div>
+        <div *ngIf="assignSubjectPage">
+          <h2>Assign faculty</h2>
+          <form [formGroup]="fSubject">
+            <div class="form-group">
+              <label> select faculty:</label>
+              <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
+                formControlName="facEmail">
+                <option>Please select</option>
+                <option *ngFor="let fac of facultyList">
+                  {{ fac.fName }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> Sem:</label>
+              <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="sem">
+                <option *ngFor="let sem of Sems">
+                  {{ sem }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> section:</label>
+              <select type="text" class="form-control" style="width: 50% !important" id="section"
+                formControlName="section">
+                <option id="a" value="a" selected="selected">
+                  "A" section
+                </option>
+                <option id="b">
+                  "B" section
+                </option>
+                <option id="c">
+                  "C" section
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> Subject Name:</label>
+              <input type="text" class="form-control" style="width: 50% !important" formControlName="subject" />
+            </div>
+            <div class="form-group">
+              <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
+                (click)="assignSubjectFaculty()">
+                Assign Subject
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="showResult">
+          <h2>Upload results</h2>
+          <form [formGroup]="fresult">
+            <div class="form-group">
+              <label> select internals:</label>
+              <select type="text" class="form-control" style="width: 50% !important" id="facEmail"
+                formControlName="internals">
+                <option>Please select</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> Subect:</label>
+              <select type="text" class="form-control" style="width: 50% !important" id="sem" formControlName="subject">
+                <option>Please select</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> Student:</label>
+              <select type="text" class="form-control" style="width: 50% !important" id="section"
+                formControlName="Student">
+                <option id="a" value="a" selected="selected">
+                  "A" section
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> Internal Marks:</label>
+              <input type="text" class="form-control" style="width: 50% !important" formControlName="internMarks" />
+            </div>
+            <div class="form-group">
+              <label> Assignment Marks:</label>
+              <input type="text" class="form-control" style="width: 50% !important" formControlName="assignMarks" />
+            </div>
+            <div class="form-group">
+              <button type="text" class="form-control" style="margin-bottom: 10%" id="assignSub"
+                (click)="assignSubjectFaculty()">
+                Upload Results
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        </div>
+        <div class="col-lg-2">
+            <table>
+              <tr>
+                <th>Sem</th>
+                <th>Subject</th>
+              </tr>
+              <tbody>
+                <tr *ngFor="let sub of subjectList">
+                  <td>{{ sub.sem }}</td>
+                  <td>{{ sub.subject }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      
     </div>
-  </div>
-  <div class="col-lg-2">
-    <table>
-      <tr>
-        <th>Sem</th>
-        <th>Subject</th>
-      </tr>
-      <tbody>
-        <tr *ngFor="let sub of subjectList">
-          <td>{{ sub.sem }}</td>
-          <td>{{ sub.subject }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

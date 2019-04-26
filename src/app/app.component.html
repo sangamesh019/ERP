@@ -1,25 +1,20 @@
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse" style="background-color: rgb(193, 193, 196)">
   <div class="container">
-    <div class="navbar-header">
-      <!-- Button for smallest screens -->
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
-          class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-
-    </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav pull-right mainNav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="#" style="color: black">Home</a></li>
 
-        <li *ngIf="whoLogged == 'faculty'"><a href="/faculty">My Page</a></li>
-        <li *ngIf="whoLogged == 'Student'"><a href="/student">My Page</a></li>
-        <li *ngIf="whoLogged == 'Admin'"><a href="/admin">My Page</a></li>
-        <li><a href="courses.html">Courses</a></li>
+        <li *ngIf="whoLogged == 'faculty'"><a href="/faculty" style="color: black">My Page</a></li>
+        <li *ngIf="whoLogged == 'Student'"><a href="/student" style="color: black">My Page</a></li>
+        <li *ngIf="whoLogged == 'Admin'"><a href="/admin" style="color: black">My Page</a></li>
+        <!-- <li><a href="courses.html">Courses</a></li> -->
+        <li><a href="/trans" style="color: black">Transportation</a></li>
 
-        <li><a href="videos.html">Videos</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <!-- <li><a href="videos.html">Videos</a></li> -->
+        <!-- <li><a href="contact.html">Contact</a></li> -->
         <li><a href="" *ngIf="!loginUser" data-toggle="modal" (click)="logInModal()"
-            data-target="#modalLoginForm">Login</a>
-          <a href="" *ngIf="loginUser" (click)="logOut()">LogOut</a></li>
+            data-target="#modalLoginForm" style="color: black">Login</a>
+          <a href="" *ngIf="loginUser" (click)="logOut()" style="color: black">LogOut</a></li>
       </ul>
     </div>
     <!--/.nav-collapse -->

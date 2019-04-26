@@ -14,18 +14,16 @@ export class FacultyprofileComponent implements OnInit {
   ngOnInit() {
     let that = this;
     this.service.getFacEmail().subscribe(data => {
-      
       that.facInfo = data;
-      // this.getSubAssignedToMe();
-      // if (that.facInfo.designation === 'HOD') {
-      //   this.hod = false;
-      // } else {
-      //   this.hod = true;
-      // }
       this.cdr.detectChanges();
     });
 
     this.fprofile = this.fb.group({
+      fName: [],
+      uName: [],
+      mName: [],
+      lName: [],
+      ctNbr:[],
       anIncome: [],
       bloodGroup: [],
       designation: [],

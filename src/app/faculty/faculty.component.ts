@@ -17,6 +17,7 @@ export class FacultyComponent implements OnInit {
   fSubject: FormGroup;
   fresult: FormGroup;
   showResult: boolean;
+  assignSubPage: boolean;
 
   constructor(private fb: FormBuilder, private service: FacultyFunService, public cdr: ChangeDetectorRef) { }
 
@@ -25,6 +26,8 @@ export class FacultyComponent implements OnInit {
   hodActivity: boolean;
   facultyList: [];
   subjectList: Object;
+  uploadNotesPage: boolean;
+  assignSubjectPage: boolean;
   Sems: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
   public facInfo = {
     fName: '',
@@ -81,7 +84,10 @@ export class FacultyComponent implements OnInit {
   }
   ngOnInit() {
     this.showResult = false;
+    this.uploadNotesPage = false;
+    this.assignSubjectPage = false;
     this.hodActivity = true;
+    this.assignSubPage = false;
     let that = this;
     this.service.getFacEmail().subscribe(data => {
       
@@ -120,9 +126,6 @@ export class FacultyComponent implements OnInit {
     });
   }
 
-  uploadResult(){
-    this.showResult = true; 
-  }
   getSubAssignedToMe(){
     let that = this;
     this.service.getSubjectAssignedToFaculty(that.facInfo.branch, that.facInfo.fName).subscribe(subjects =>{
@@ -157,15 +160,31 @@ export class FacultyComponent implements OnInit {
 
   assignSubject() {
 
+    this.showResult = false; 
+    this.uploadNotesPage = false;
+    this.assignSubjectPage = true;
+    // this.assignSubPage = true;
+
     this.service.getFacList(this.facInfo.branch).subscribe(fac => {
       if (fac != null) {
         this.facultyList = fac;
       }
     });
-    this.hodActivity = false;
+    // this.hodActivity = false;
+    
   }
 
   assignNotes() {
     this.hodActivity = true;
+    this.uploadNotesPage = true;
+    this.assignSubjectPage = false;
+    this.showResult = false; 
+    this.assignSubPage = false;
+  }
+  uploadResult(){
+    this.showResult = true; 
+    this.uploadNotesPage = false;
+    this.assignSubjectPage = false;
+    this.assignSubPage = false;
   }
 }
