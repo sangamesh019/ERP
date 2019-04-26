@@ -23,6 +23,7 @@ ngOnInit() {
     }
     this.vehicleLogList.forEach((element, index) => {
       if(element.fuelBill != null || element.fuelPro != null || element.fuelCertNbr != null ||element.fuelFilldate != null ||element.fuelHSD != null || element.fuelBillNbr != null){
+        let x = this.vehicleLogList[index];
         this.vehicleLog.push(element);
         console.log(index);
       }
