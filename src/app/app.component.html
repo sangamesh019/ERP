@@ -8,7 +8,7 @@
         <li *ngIf="whoLogged == 'Student'"><a href="/student" style="color: black">My Page</a></li>
         <li *ngIf="whoLogged == 'Admin'"><a href="/admin" style="color: black">My Page</a></li>
         <!-- <li><a href="courses.html">Courses</a></li> -->
-        <li><a href="/trans" style="color: black">Transportation</a></li>
+        <li *ngIf="whoLogged == 'transAdmin'"><a href="/trans" style="color: black">Transportation</a></li>
 
         <!-- <li><a href="videos.html">Videos</a></li> -->
         <!-- <li><a href="contact.html">Contact</a></li> -->
@@ -43,6 +43,7 @@
               <option>Student</option>
               <option>faculty</option>
               <option>Admin</option>
+              <option value="transAdmin">Transport Admin</option>
             </select>
             <label> Select Role</label>
           </div>

@@ -54,6 +54,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
   }
   login() {
     if (this.profileForm.valid) {
+      if(this.profileForm.controls['who'].value !== 'transAdmin'){
       this.service.loginUser({ "usn": this.profileForm.controls['userName'].value, "password": this.profileForm.controls['password'].value, 'role': this.profileForm.controls['who'].value }).subscribe(result => {
         if (result) {
           alert('user present')
@@ -65,7 +66,22 @@ export class AppComponent implements OnInit, AfterContentChecked {
         } else {
           this.userStatus = 'The usn and password doesnt match';
         }
+      
       });
+    } else {
+
+      if(this.profileForm.controls['userName'].value === "TransAdmin" && this.profileForm.controls['password'].value === "admin"){
+        alert('user present')
+          localStorage.setItem('who' , this.profileForm.controls['who'].value);
+          localStorage.setItem('id' , this.profileForm.controls['userName'].value);
+          this.loginUser = true;
+          this.route.navigateByUrl('/home');
+          document.getElementById("modalLoginForm").click();
+      } else {
+        
+        this.userStatus = 'The usn and password doesnt match';
+      }
+    }
     } else {
       alert("invalid form data");
     }
