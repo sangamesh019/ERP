@@ -41,6 +41,7 @@ export class FacultyprofileComponent implements OnInit {
       this.fprofile.get(['paddress', 'locality']).setValue(that.facEdit.paddress.locality);
       this.fprofile.get(['paddress' ,'pincode']).setValue(that.facEdit.paddress.pincode);
       this.fprofile.get(['paddress', 'street']).setValue(that.facEdit.paddress.street);
+      this.fprofile.get(['paddress', 'state']).setValue(that.facEdit.paddress.state);
       
       this.fprofile.get(['taddress', 'city']).setValue(that.facEdit.taddress.city);
       this.fprofile.get(['taddress', 'country']).setValue(that.facEdit.taddress.country);
@@ -48,6 +49,7 @@ export class FacultyprofileComponent implements OnInit {
       this.fprofile.get(['taddress', 'locality']).setValue(that.facEdit.taddress.locality);
       this.fprofile.get(['taddress' ,'pincode']).setValue(that.facEdit.taddress.pincode);
       this.fprofile.get(['taddress', 'street']).setValue(that.facEdit.taddress.street);
+      this.fprofile.get(['taddress', 'state']).setValue(that.facEdit.taddress.state);
       
       if(that.facEdit.educationDetails.length > 0){
         that.facEdit.educationDetails.forEach(element => {
