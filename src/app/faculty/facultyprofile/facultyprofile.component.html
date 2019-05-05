@@ -7,8 +7,8 @@
         </div>
         <div class="card-body">
           <div class="author">
-            <a >
-              <img class="avatar border-gray" src="data:image/jpeg;base64,{{ facInfo.photo }}" >
+            <a>
+              <img class="avatar border-gray" src="data:image/jpeg;base64,{{ facInfo.photo }}">
               <h5 class="title">{{ facInfo.fName }}</h5>
             </a>
             <p class="description">
@@ -21,9 +21,9 @@
             <br> I wanna bag it up"
           </p>
         </div>
-       
+
       </div>
-     
+
     </div>
     <div class="col-md-8">
       <div class="card card-user">
@@ -33,22 +33,23 @@
         <div class="card-body">
           <form [formGroup]="fprofile">
             <div class="row">
-              <div class="col-md-5 pr-1">
+              <!-- <div class="col-md-5 pr-1">
                 <div class="form-group">
                   <label>Department (disabled)</label>
-                  <input type="text" class="form-control" disabled="" placeholder="Company" value="Transport Department">
+                  <input type="text" class="form-control" disabled="" placeholder="Company"
+                    value="Transport Department">
                 </div>
-              </div>
-              <div class="col-md-3 px-1">
+              </div> -->
+              <!-- <div class="col-md-3 px-1">
                 <div class="form-group">
                   <label>Username</label>
                   <input type="text" class="form-control" placeholder="Username" value="dipl23">
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" placeholder="dip@gmail.com">
+                  <input type="email" class="form-control" placeholder="email" formControlName="email" readonly>
                 </div>
               </div>
             </div>
@@ -56,107 +57,239 @@
               <div class="col-md-4 pr-1">
                 <div class="form-group">
                   <label>First Name</label>
-                  <input type="text" class="form-control" placeholder="Company" value="diptangsu">
+                  <input type="text" class="form-control" placeholder="Company" value="diptangsu"
+                    formControlName="fName">
                 </div>
               </div>
               <div class="col-md-4 px-1">
-                  <div class="form-group">
-                      <label>Middle Name</label>
-                      <input type="text" class="form-control" placeholder="Company" value="Babu">
-                  </div>
+                <div class="form-group">
+                  <label>Middle Name</label>
+                  <input type="text" class="form-control" placeholder="Company" value="" formControlName="mName">
+                </div>
               </div>
               <div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label>Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="sasmal">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                          <label>Contact Number</label>
-                          <input type="number" class="form-control" placeholder="Number" value="8961622208">
-                        </div>
-                </div>
-                <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>Blood Group</label>
-                            <input type="text" class="form-control" placeholder="Blood group" value="o positive">
-                        </div>
-                </div> 
-                <div class="col-md-4 pl-1">
-                        <div class="form-group">
-                            <label>Relationship Status</label>
-                            <select type="text" class="form-control" style="width: 50% !important" id="married" >
-                              <option id="b">
-                                Single
-                              </option>
-                              <option id="c">
-                                Married
-                              </option>
-                              <option id="c">
-                                Others
-                              </option>
-                            </select>
-                        </div>
-                </div>
-          </div>
-          <div class="row">
-                <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                          <label>License Number</label>
-                          <input type="number" class="form-control" placeholder="Number" value="9900091622208">
-                        </div>
-                </div>
-                <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>Father's Name</label>
-                            <input type="text" class="form-control" placeholder="name of father" value="Rakesh RK">
-                        </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control" placeholder="Home Address" value="chickballapur, bangalore">
+                  <input type="text" class="form-control" placeholder="Last Name" value="" formControlName="lName">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4 pr-1">
                 <div class="form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" placeholder="City" value="bangalore">
+                  <label>Contact Number</label>
+                  <input type="number" class="form-control" placeholder="Number" value="" formControlName="mNumber">
                 </div>
               </div>
               <div class="col-md-4 px-1">
                 <div class="form-group">
-                  <label>State</label>
-                  <input type="text" class="form-control" placeholder="State" value="Karnataka">
+                  <label>Blood Group</label>
+                  <input type="text" class="form-control" placeholder="Blood group" value="o positive"
+                    formControlName="bloodGroup">
                 </div>
               </div>
               <div class="col-md-4 pl-1">
                 <div class="form-group">
-                  <label>Postal Code</label>
-                  <input type="number" class="form-control" placeholder="ZIP Code" value="562101">
+                  <label>Relationship Status</label>
+                  <select type="text" class="form-control" style="width: 50% !important" id="married"
+                    formControlName="maritalStatus">
+                    <option id="b">
+                      Single
+                    </option>
+                    <option id="c">
+                      Married
+                    </option>
+                    <option id="c">
+                      Others
+                    </option>
+                  </select>
                 </div>
               </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>License Number</label>
+                  <input type="number" class="form-control" placeholder="Number" value="" formControlName="licenseNbr">
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Father's Name</label>
+                  <input type="text" class="form-control" placeholder="name of father" value=""
+                    formControlName="pfatherName">
+                </div>
+              </div>
+            </div>
+
+            <label>Permnent address</label>
+            <div class="row">
+              <div formGroupName="paddress">
+                <div class="col-md-12">
+                  <!-- <div class="form-group">
+                  <label>locality</label>
+                  <input type="text" class="form-control"  
+                    formControlName="fName">
+                </div> -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>House # and address</label>
+                      <input type="text" class="form-control" formControlName="houseNbr">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Locality</label>
+                      <input type="text" class="form-control" formControlName="locality">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Street</label>
+                      <input type="text" class="form-control" formControlName="street">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>State</label>
+                      <input type="text" class="form-control" formControlName="state">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>city</label>
+                      <input type="text" class="form-control" formControlName="city">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Country</label>
+                      <input type="text" class="form-control" formControlName="country" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Pincode</label>
+                      <input type="text" class="form-control" formControlName="pincode">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <label>Current address</label>
+            <div class="row">
+              <div formGroupName="taddress">
+                <div class="col-md-12">
+                  <!-- <div class="form-group">
+                          <label>locality</label>
+                          <input type="text" class="form-control"  
+                            formControlName="fName">
+                        </div> -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>House # and address</label>
+                      <input type="text" class="form-control" formControlName="houseNbr">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Locality</label>
+                      <input type="text" class="form-control" formControlName="locality">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Street</label>
+                      <input type="text" class="form-control" formControlName="street">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>State</label>
+                      <input type="text" class="form-control" formControlName="state">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>city</label>
+                      <input type="text" class="form-control" formControlName="city">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Country</label>
+                      <input type="text" class="form-control" formControlName="country" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Pincode</label>
+                      <input type="text" class="form-control" formControlName="pincode">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <label>Education details</label>
+            <div class="row">
+                <div formArrayName="educationDetails"
+                *ngFor="let item of fprofile.get('educationDetails').controls; let i = index;">
+                <div [formGroupName]="i">
+              <div class="col-md-12">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Education</label>
+                    <input type="text" class="form-control" formControlName="eqDegree">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                      <label>eqLevel</label>
+                      <input type="text" class="form-control" formControlName="eqLevel">
+                    </div>
+                  </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Specialization</label>
+                    <input type="text" class="form-control" formControlName="eqSpecialization">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>University</label>
+                    <input type="text" class="form-control" formControlName="eqUniv">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>passedout year</label>
+                    <input type="text" class="form-control" formControlName="eqYear">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>GPA</label>
+                    <input type="text" class="form-control" formControlName="eqGPA">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button (click)="addEducation('')">add Education</button>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label>About Me</label>
-                  <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                  <textarea formControlName="aboutMe"
+                    class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="update ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+                <button type="submit" class="btn btn-primary btn-round" (click)="update()">Update Profile</button>
               </div>
             </div>
           </form>

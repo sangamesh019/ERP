@@ -55,6 +55,11 @@ export class FacultyFunService {
     let email = localStorage.getItem('id');
     return this.http.get("http://localhost:8080/college/faculty/" + email);
   }
+
+  getFacEditEmail(): Observable<any> {
+    let email = localStorage.getItem('id');
+    return this.http.get("http://localhost:8080/college/facultyEdit/" + email);
+  }
   geAllEvents(): Observable<any> {
     return this.http.get("http://localhost:8080/college/getAllEvents/");
   }
@@ -77,5 +82,8 @@ export class FacultyFunService {
 
   uploadResults(result) {
     return this.http.post("http://localhost:8080/college/uploadResults", result);
+  }
+  updateProfile(profile) {
+    return this.http.post("http://localhost:8080/college/editFaculty", profile);
   }
 }
