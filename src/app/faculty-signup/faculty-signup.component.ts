@@ -97,7 +97,7 @@ export class FacultySignupComponent implements OnInit {
       this.currentFileUpload = this.selectedFiles.item(0);
       let values = this.mapFacultyDetails(this.profileForm);
       this.service.signUp(values).subscribe(status => {
-        if (status.error !== undefined && status.error !== 'OK') {
+        if (status.error !== undefined || status.error !== 'OK') {
           this.service
             .signUpFile(this.currentFileUpload, values.email)
             .subscribe(result => {
