@@ -28,9 +28,7 @@ export class FacultyprofileComponent implements OnInit {
     this.service.getFacEditEmail().subscribe(editprofile => {
       if(editprofile !=null || editprofile != undefined){
         that.facEdit = editprofile;
-      } else {
-        alert('update values');
-      }
+      
       this.cdr.detectChanges();
       this.fprofile.controls['bloodGroup'].setValue(that.facEdit.bloodGroup);
       this.fprofile.controls['mNumber'].setValue(that.facEdit.mNumber);
@@ -62,9 +60,14 @@ export class FacultyprofileComponent implements OnInit {
           control.removeAt(0)
       }
       that.fprofile.controls['educationDetails'].value.push(this.items);
+      that.fprofile.controls['licenseNbr'].setValue(that.facEdit.lnbr);
+      that.fprofile.controls['pfatherName'].setValue(that.facEdit.pfatherName);
       
 
       that.fprofile.controls['bloodGroup'].setValue(that.facEdit.bloodGroup);
+    } else {
+      alert('update values');
+    }
     });
 
     this.fprofile = this.fb.group({
@@ -132,10 +135,14 @@ export class FacultyprofileComponent implements OnInit {
   }
   update() {
     alert(this.fprofile.valid);
+    if(this.fprofile.controls['password'].value !== ''){
     let fporfileData = this.mapProfile();
     this.service.updateProfile(fporfileData).subscribe(result =>{
       alert(result);
     });
+  } else {
+    alert('enter password');
+  }
   }
 
   mapProfile() {
@@ -158,7 +165,7 @@ export class FacultyprofileComponent implements OnInit {
       'mNumber': this.fprofile.controls['mNumber'].value,
       'bloodGroup': this.fprofile.controls['bloodGroup'].value,
       'maritalStatus': this.fprofile.controls['maritalStatus'].value,
-      'lnbr': this.fprofile.controls['lnbr'].value,
+      'lnbr': this.fprofile.controls['licenseNbr'].value,
       'designation': this.facInfo.designation,
       'email': this.facInfo.email,
       'paddress': {
@@ -180,8 +187,8 @@ export class FacultyprofileComponent implements OnInit {
         'pincode' : this.fprofile.controls['taddress'].value.pincode
       },
       'educationDetails':educationList,
-      'password': this.fprofile.controls['password'].value
-      // 'lnbr': this.fprofile.controls['fName'].value,
+      'password': this.fprofile.controls['password'].value,
+      'pfatherName': this.fprofile.controls['pfatherName'].value
     }
     
   }
