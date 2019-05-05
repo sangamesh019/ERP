@@ -53,19 +53,18 @@ export class FacultyprofileComponent implements OnInit {
       
       if(that.facEdit.educationDetails.length > 0){
         that.facEdit.educationDetails.forEach(element => {
-          
-          let control = <FormArray>this.fprofile.controls.educationDetails;
-          control.removeAt(0)
-          
-          this.addEducation(element);
-          
+          that.addEducation(element);
         });
         
       }
-      this.fprofile.get['educationDetails'].push(this.items);
+      if(that.items.controls.length > 0){
+        let control = <FormArray>that.fprofile.controls.educationDetails;
+          control.removeAt(0)
+      }
+      that.fprofile.controls['educationDetails'].value.push(this.items);
       
 
-      this.fprofile.controls['bloodGroup'].setValue(that.facEdit.bloodGroup);
+      that.fprofile.controls['bloodGroup'].setValue(that.facEdit.bloodGroup);
     });
 
     this.fprofile = this.fb.group({
@@ -73,6 +72,7 @@ export class FacultyprofileComponent implements OnInit {
       // uName: [],
       mName: [],
       lName: [],
+      password: [],
       // ctNbr:[],
       // anIncome: [],
       bloodGroup: [],
@@ -179,7 +179,8 @@ export class FacultyprofileComponent implements OnInit {
         'country' : this.fprofile.controls['taddress'].value.country,
         'pincode' : this.fprofile.controls['taddress'].value.pincode
       },
-      'educationDetails':educationList
+      'educationDetails':educationList,
+      'password': this.fprofile.controls['password'].value
       // 'lnbr': this.fprofile.controls['fName'].value,
     }
     
