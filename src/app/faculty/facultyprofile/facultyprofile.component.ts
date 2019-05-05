@@ -153,12 +153,12 @@ export class FacultyprofileComponent implements OnInit {
     });
     return {
       'fName': this.fprofile.controls['fName'].value,
-      'mName': this.fprofile.controls['fName'].value,
-      'lName': this.fprofile.controls['fName'].value,
-      'mNumber': this.fprofile.controls['fName'].value,
-      'bloodGroup': this.fprofile.controls['fName'].value,
-      'maritalStatus': this.fprofile.controls['fName'].value,
-      'lnbr': this.fprofile.controls['fName'].value,
+      'mName': this.fprofile.controls['mName'].value,
+      'lName': this.fprofile.controls['lName'].value,
+      'mNumber': this.fprofile.controls['mNumber'].value,
+      'bloodGroup': this.fprofile.controls['bloodGroup'].value,
+      'maritalStatus': this.fprofile.controls['maritalStatus'].value,
+      'lnbr': this.fprofile.controls['lnbr'].value,
       'designation': this.facInfo.designation,
       'email': this.facInfo.email,
       'paddress': {
