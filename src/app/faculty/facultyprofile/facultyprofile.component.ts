@@ -137,14 +137,14 @@ export class FacultyprofileComponent implements OnInit {
   }
   update() {
     alert(this.fprofile.valid);
-    if(this.fprofile.controls['password'].value !== ''){
+    // if(this.fprofile.controls['password'].value !== ''){
     let fporfileData = this.mapProfile();
     this.service.updateProfile(fporfileData).subscribe(result =>{
       alert(result);
     });
-  } else {
-    alert('enter password');
-  }
+  // } else {
+  //   alert('enter password');
+  // }
   }
 
   mapProfile() {
