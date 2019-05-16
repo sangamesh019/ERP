@@ -26,5 +26,7 @@ export class AdminService {
   listAllFaculty(): Observable<any>{
     return this.http.get('http://localhost:8080/college/facultList');
   }
-
+  disableUser(user, type):Observable<any>{
+    return this.http.post('http://localhost:8080/college/disable/'+type+'/', user);
+  }
 }

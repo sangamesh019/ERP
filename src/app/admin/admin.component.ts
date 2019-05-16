@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from './admin.service';
 import { FacultyFunService } from '../faculty/faculty-fun.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -31,7 +32,7 @@ export class AdminComponent implements OnInit {
   showListOfStudents: boolean;
   showListOfFaculty: boolean;
   enableOrDisable: Array<any> = [];
-  constructor(public adminService: AdminService, public service: FacultyFunService) { }
+  constructor(public adminService: AdminService, public service: FacultyFunService, public route: Router) { }
 
   ngOnInit() {
     this.showListOfStudents = false;
@@ -64,16 +65,19 @@ export class AdminComponent implements OnInit {
 
   selected(val){
     if(val.target.checked){
-      this.enableOrDisable.push({'usn': val.target.defaultValue})
+      this.enableOrDisable.push(val.target.defaultValue)
     } else {
       // this.enableOrDisable.filter(val => val != {'usn':val.target.defaultValue});
-      this.enableOrDisable.splice(this.enableOrDisable.indexOf({'usn':val.target.defaultValue}), 1);
+      this.enableOrDisable.splice(this.enableOrDisable.indexOf(val.target.defaultValue), 1);
     }
   }
 
-  disableSelctedStu(){
+  disableSelctedStu(type){
     if(this.enableOrDisable.length != 0){
-      // this.service.disableStudents();
+      this.adminService.disableUser(this.enableOrDisable, type).subscribe(result =>{
+        // alert(result);
+        this.enableUsers();
+      });
     } else {
       alert('no students selected');
     }

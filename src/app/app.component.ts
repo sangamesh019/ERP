@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
           this.route.navigateByUrl('/home');
           document.getElementById("modalLoginForm").click();
         } else {
-          this.userStatus = 'The usn and password doesnt match';
+          this.userStatus = 'The usn and password doesnt match or user has to be activated';
         }
       
       });
