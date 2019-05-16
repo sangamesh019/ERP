@@ -12,6 +12,7 @@ export class FacultyprofileComponent implements OnInit {
   items: FormArray;
   itemsList: Array<FormGroup> =[];
   facEdit: any;
+  aboutMeValue = '';
   constructor(private fb: FormBuilder, private service: FacultyFunService, public cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class FacultyprofileComponent implements OnInit {
       this.fprofile.controls['mNumber'].setValue(that.facEdit.mNumber);
       this.fprofile.controls['maritalStatus'].setValue(that.facEdit.maritalStatus);
       this.fprofile.controls['aboutMe'].setValue(that.facEdit.aboutMe);
-
+      this.aboutMeValue = this.fprofile.controls['aboutMe'].value;
       this.fprofile.get(['paddress', 'city']).setValue(that.facEdit.paddress.city);
       this.fprofile.get(['paddress', 'country']).setValue(that.facEdit.paddress.country);
       this.fprofile.get(['paddress', 'houseNbr']).setValue(that.facEdit.paddress.houseNbr);
@@ -129,7 +130,7 @@ export class FacultyprofileComponent implements OnInit {
 
   addEducation(values) {
     this.items = this.fprofile.get('educationDetails') as FormArray;
-    if (this.items.length < 4) {
+    if (this.items.length <= 4) {
       this.items.push(this.education(values));
     } else {
       alert('not allowed')
@@ -190,7 +191,8 @@ export class FacultyprofileComponent implements OnInit {
       },
       'educationDetails':educationList,
       'password': this.fprofile.controls['password'].value,
-      'pfatherName': this.fprofile.controls['pfatherName'].value
+      'pfatherName': this.fprofile.controls['pfatherName'].value,
+      'aboutMe': this.fprofile.controls['aboutMe'].value
     }
     
   }
