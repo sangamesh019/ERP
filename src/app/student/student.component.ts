@@ -34,10 +34,10 @@ export class StudentComponent implements OnInit, AfterViewInit {
   showAssignment() {
     this.assignmentShow = !this.assignmentShow;
   }
-  getAssignment() {
+  getAssignment(type) {
     this.loader = true;
     this.assignmentList =[];
-    this.service.getAssignmentList(this.studentInfo).subscribe(assignment => {
+    this.service.getAssignmentList(this.studentInfo, type).subscribe(assignment => {
       this.assignmentList = assignment;
       this.loader = false;
     });

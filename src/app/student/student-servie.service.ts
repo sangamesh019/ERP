@@ -37,8 +37,8 @@ export class StudentServieService {
     return this.http.post("http://localhost:8080/college/signUpStudentPhoto",fomrData);
   }
 
-  getAssignmentList(student): Observable<any> {
-    return this.http.get("http://localhost:8080/college/listAllAssignments/"+student.branch+"/"+student.sem, this.httpOptions);
+  getAssignmentList(student, type): Observable<any> {
+    return this.http.get("http://localhost:8080/college/listAllAssignments/"+student.branch+"/"+student.sem+"/"+type, this.httpOptions);
   }
 
   getMyresult(usn): Observable<any> {
