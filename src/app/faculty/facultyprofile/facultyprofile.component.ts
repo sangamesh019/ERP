@@ -130,7 +130,7 @@ export class FacultyprofileComponent implements OnInit {
 
   addEducation(values) {
     this.items = this.fprofile.get('educationDetails') as FormArray;
-    if (this.items.length <= 4 && values != '') {
+    if (this.items.length < 5) {
       this.items.push(this.education(values));
     } else {
       alert('not allowed')
