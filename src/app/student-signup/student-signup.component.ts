@@ -73,8 +73,8 @@ export class StudentSignupComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  submit() {
-    
+  submit(data) {
+    if(!data){
     if (this.profileForm.valid) {
       if(this.profileForm.controls['branch'].value != '' || this.profileForm.controls['sem'].value != '' ) {
       this.currentFileUpload = this.selectedFiles.item(0);
@@ -86,11 +86,11 @@ export class StudentSignupComponent implements OnInit {
             .subscribe(result => {
               alert(result);
               this.route.navigateByUrl("/home");
-              localStorage.setItem("who", "student");
-              localStorage.setItem(
-                "id",
-                this.profileForm.controls["usn"].value
-              );
+              // localStorage.setItem("who", "student");
+              // localStorage.setItem(
+              //   "id",
+              //   this.profileForm.controls["usn"].value
+              // );
             });
         } else {
         }
@@ -101,6 +101,29 @@ export class StudentSignupComponent implements OnInit {
     } else {
       alert('invalid')
     }
+  } else {
+    if (this.profileForm.valid) {
+      if(this.profileForm.controls['branch'].value != '' || this.profileForm.controls['sem'].value != '' ) {
+      this.currentFileUpload = this.selectedFiles.item(0);
+      let values = this.mapStudentDetails(this.profileForm);
+      this.service.editUp(values).subscribe(status => {
+        if (status) {
+          this.service
+            .signUpFile(this.currentFileUpload, values.mNumber)
+            .subscribe(result => {
+              alert(result);
+              this.route.navigateByUrl("/home");
+            });
+        } else {
+        }
+      });
+    } else {
+      alert('select branch and sem');
+    }
+    } else {
+      alert('invalid')
+    }
+  }
   }
 
   

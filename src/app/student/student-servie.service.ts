@@ -29,6 +29,11 @@ export class StudentServieService {
   signUp(student): Observable<any> { 
     return this.http.post("http://localhost:8080/college/signUpStudent", student, this.httpOptions);
   }
+
+  editUp(student): Observable<any> { 
+    return this.http.post("http://localhost:8080/college/editStudent", student, this.httpOptions);
+  }
+
   signUpFile(photo: File, phNumber: string): Observable<any> { 
     let fomrData = new FormData();
     fomrData.append('file', photo);
