@@ -104,18 +104,23 @@ export class StudentSignupComponent implements OnInit {
   } else {
     if (this.profileForm.valid) {
       if(this.profileForm.controls['branch'].value != '' || this.profileForm.controls['sem'].value != '' ) {
-      // this.currentFileUpload = this.selectedFiles.item(0);
+      if(this.selectedFiles !=undefined){
+        this.currentFileUpload = this.selectedFiles.item(0);
+      }
       let values = this.mapStudentDetails(this.profileForm);
       this.service.editUp(values).subscribe(status => {
-        // if (status) {
-        //   this.service
-        //     .signUpFile(this.currentFileUpload, values.mNumber)
-        //     .subscribe(result => {
-        //       alert(result);
+        if (status) {
+          if(this.selectedFiles !=undefined){
+          this.service
+            .signUpFile(this.currentFileUpload, values.mNumber)
+            .subscribe(result => {
+              alert(result);
               
-        //     });
-        // } else {
-        // }
+            });
+          }
+        } else {
+        alert("error while updating")
+        }
         this.route.navigateByUrl("/student");
       });
     } else {
