@@ -104,18 +104,19 @@ export class StudentSignupComponent implements OnInit {
   } else {
     if (this.profileForm.valid) {
       if(this.profileForm.controls['branch'].value != '' || this.profileForm.controls['sem'].value != '' ) {
-      this.currentFileUpload = this.selectedFiles.item(0);
+      // this.currentFileUpload = this.selectedFiles.item(0);
       let values = this.mapStudentDetails(this.profileForm);
       this.service.editUp(values).subscribe(status => {
-        if (status) {
-          this.service
-            .signUpFile(this.currentFileUpload, values.mNumber)
-            .subscribe(result => {
-              alert(result);
-              this.route.navigateByUrl("/home");
-            });
-        } else {
-        }
+        // if (status) {
+        //   this.service
+        //     .signUpFile(this.currentFileUpload, values.mNumber)
+        //     .subscribe(result => {
+        //       alert(result);
+              
+        //     });
+        // } else {
+        // }
+        this.route.navigateByUrl("/student");
       });
     } else {
       alert('select branch and sem');
@@ -174,9 +175,9 @@ export class StudentSignupComponent implements OnInit {
       password: student.controls["password"].value,
       parentsDetails: {
         fatherName: student.controls["fatherName"].value,
-        fOccuption: student.controls["fOccupation"].value,
+        fOccupation: student.controls["fOccupation"].value,
         motherName: student.controls["motherName"].value,
-        mOccuption: student.controls["mOccupation"].value,
+        mOccupation: student.controls["mOccupation"].value,
         aIncome: student.controls["anIncome"].value
       }
     };
